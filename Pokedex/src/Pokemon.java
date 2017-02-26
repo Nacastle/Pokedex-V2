@@ -27,10 +27,10 @@ class Pokemon {
     private int Ataque_Especial;
     private int Defensa_Especial;
     private int Velocidad;
-    private Pokemon Evolucion;
+    private String Evolucion;
     private Object Imagen;
 
-    public Pokemon(String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, Pokemon Evolucion, Object Imagen) {
+    public Pokemon(String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
         this.Nombre = Nombre;
         this.Apodo = Apodo;
         this.Descripcion = Descripcion;
@@ -160,11 +160,11 @@ class Pokemon {
         this.Velocidad = Velocidad;
     }
 
-    public Pokemon getEvolucion() {
+    public String getEvolucion() {
         return Evolucion;
     }
 
-    public void setEvolucion(Pokemon Evolucion) {
+    public void setEvolucion(String Evolucion) {
         this.Evolucion = Evolucion;
     }
 
