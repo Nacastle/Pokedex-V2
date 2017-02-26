@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  * @author Alexis
  */
 class Pokemon {
+    private int Disponible;
     private String Nombre;
     private String Apodo;
     private String Descripcion;
@@ -30,7 +31,8 @@ class Pokemon {
     private String Evolucion;
     private Object Imagen;
 
-    public Pokemon(String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
+    public Pokemon(int Disponible,String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
+        this.Disponible=Disponible;
         this.Nombre = Nombre;
         this.Apodo = Apodo;
         this.Descripcion = Descripcion;
@@ -48,6 +50,14 @@ class Pokemon {
         this.Imagen = Imagen;
     }
 
+    public int getDisponible() {
+        return Disponible;
+    }
+
+    public void setDisponible(int Disponible) {
+        this.Disponible = Disponible;
+    }
+    
     public String getNombre() {
         return Nombre;
     }
