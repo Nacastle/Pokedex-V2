@@ -1,9 +1,14 @@
+
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import javax.swing.ImageIcon;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Alexis
@@ -15,6 +20,9 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        File n = new File("./pokemon-wallpaper-hd-9.jpg");
+        Image img = Toolkit.getDefaultToolkit().createImage(n.getPath()).getScaledInstance(817, 444, 0);
+        b_login.setIcon(new ImageIcon(img));
     }
 
     /**
@@ -26,21 +34,88 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jd_register = new javax.swing.JDialog();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jSpinner1 = new javax.swing.JSpinner();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        back_register = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tf_user = new javax.swing.JTextField();
+        pf_password = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        b_login = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jd_register.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setText("Nombre");
+        jd_register.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+
+        jLabel4.setText("Edad");
+        jd_register.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+
+        jLabel5.setText("Usuario");
+        jd_register.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
+
+        jLabel6.setText("Contraseña");
+        jd_register.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 80, -1));
+        jd_register.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 180, -1));
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
+        jd_register.getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+        jd_register.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 180, -1));
+        jd_register.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 180, -1));
+
+        jButton3.setText("Registrar");
+        jd_register.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
+
+        jLabel7.setText("Bienvenido al Sistema de Registro del Pueblo Palleta");
+        jd_register.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
+        jd_register.getContentPane().add(back_register, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("User:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 148, -1, -1));
+
+        jLabel2.setText("Password");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 192, -1, -1));
+        getContentPane().add(tf_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 143, 250, -1));
+        getContentPane().add(pf_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 187, 250, -1));
+
+        jButton1.setText("Register");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, -1));
+
+        jButton2.setText("Login");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 120, -1));
+        getContentPane().add(b_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 817, 444));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        File n = new File("./613933.jpg");
+        Image img = Toolkit.getDefaultToolkit().createImage(n.getPath()).getScaledInstance(490, 360, 0);
+        back_register.setIcon(new ImageIcon(img));
+        this.jd_register.pack();
+        this.jd_register.setModal(true);
+        this.setLocationRelativeTo(this);
+        this.jd_register.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +153,24 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel b_login;
+    private javax.swing.JLabel back_register;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JDialog jd_register;
+    private javax.swing.JPasswordField pf_password;
+    private javax.swing.JTextField tf_user;
     // End of variables declaration//GEN-END:variables
 }
