@@ -1,5 +1,10 @@
   
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,12 +21,19 @@ public class User {
     private String Name;
     private String user;
     private String password;
-    private ArrayList<Pokemon> pokedex = new ArrayList();
+    TDA_Archivo pokedex;
 
     public User() {
     }
 
     public User(int age, String Name, String user, String password) {
+        File x = new File(user);
+        try {
+            x.createNewFile();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Algo Exploto");
+        }
+        this.pokedex = new TDA_Archivo(x);
         this.age = age;
         this.Name = Name;
         this.user = user;
@@ -60,11 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Pokemon> getPokedex() {
+    public TDA_Archivo getPokedex() {
         return pokedex;
     }
 
-    public void setPokedex(ArrayList<Pokemon> pokedex) {
+    public void setPokedex(TDA_Archivo pokedex) {
         this.pokedex = pokedex;
     }
 

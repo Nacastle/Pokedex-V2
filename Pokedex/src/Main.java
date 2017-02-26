@@ -46,6 +46,7 @@ public class Main extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         back_register = new javax.swing.JLabel();
+        jd_Interface = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_user = new javax.swing.JTextField();
@@ -81,6 +82,17 @@ public class Main extends javax.swing.JFrame {
         jd_register.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
         jd_register.getContentPane().add(back_register, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
+        javax.swing.GroupLayout jd_InterfaceLayout = new javax.swing.GroupLayout(jd_Interface.getContentPane());
+        jd_Interface.getContentPane().setLayout(jd_InterfaceLayout);
+        jd_InterfaceLayout.setHorizontalGroup(
+            jd_InterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 676, Short.MAX_VALUE)
+        );
+        jd_InterfaceLayout.setVerticalGroup(
+            jd_InterfaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 388, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -101,6 +113,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, -1));
 
         jButton2.setText("Login");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 120, -1));
         getContentPane().add(b_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 817, 444));
 
@@ -116,6 +133,10 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.jd_register.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -169,6 +190,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JDialog jd_Interface;
     private javax.swing.JDialog jd_register;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTextField tf_user;
