@@ -24,7 +24,7 @@ public class TDA_Archivo {
 
     public TDA_Archivo() {
     }
-    
+
     public TDA_Archivo(File Archivo) {
         this.Archivo = Archivo;
     }
@@ -81,7 +81,13 @@ public class TDA_Archivo {
                             + nuevo.getDefensa_Especial() + "•"
                             + nuevo.getVelocidad() + "•"
                             + nuevo.getEvolucion() + "•"
-                            + nuevo.getImagen();
+                            + nuevo.getImagen() + "•";
+                    for (int i = 0; i < nuevo.getDebilidades().size(); i++) {
+                        nuevo_contenido = nuevo_contenido + nuevo.getDebilidades().get(i) + "○";
+                    }
+                    nuevo_contenido = nuevo_contenido + "•"
+                            + nuevo.getTipo()[0] + "•"
+                            + nuevo.getTipo()[1];
 
                     if (mayor != size) {
                         nuevo_contenido = nuevo_contenido + "1•";
@@ -139,7 +145,13 @@ public class TDA_Archivo {
                     + nuevo.getDefensa_Especial() + "•"
                     + nuevo.getVelocidad() + "•"
                     + nuevo.getEvolucion() + "•"
-                    + nuevo.getImagen();
+                    + nuevo.getImagen() + "•";
+            for (int i = 0; i < nuevo.getDebilidades().size(); i++) {
+                nuevo_contenido = nuevo_contenido + nuevo.getDebilidades().get(i) + "○";
+            }
+            nuevo_contenido = nuevo_contenido + "•"
+                    + nuevo.getTipo()[0] + "•"
+                    + nuevo.getTipo()[1];
             FileWriter filewriter = null;
             BufferedWriter bufferedwriter = null;
             try {
@@ -206,8 +218,19 @@ public class TDA_Archivo {
                 int Velocidad = Integer.parseInt(revision.next());
                 String Evolucion = revision.next();
                 Object Imagen = revision.next();
+                Scanner debil = new Scanner(revision.next());
+                ArrayList<String> Debilidades = new ArrayList<String>();
+                debil.useDelimiter("○");
+                while (hability.hasNext()) {
+                    Debilidades.add(debil.next());
+                }
+                String tipo[]=new String[2];
+                tipo[0]=revision.next();
+                tipo[1]=revision.next();
                 Pokemon pokemon = new Pokemon(0, Nombre, Apodo, Descripcion, Altura, Categoria, Peso, genero, Hp, Ataque, Defensa, Ataque_Especial, Defensa_Especial, Velocidad, Evolucion, Imagen);
                 pokemon.setHabilidades(Habilidades);
+                pokemon.setDebilidades(Debilidades);
+                pokemon.setTipo(tipo);
                 listados.add(pokemon);
             }
         }
@@ -245,7 +268,13 @@ public class TDA_Archivo {
                             + condenado.getDefensa_Especial() + "•"
                             + condenado.getVelocidad() + "•"
                             + condenado.getEvolucion() + "•"
-                            + condenado.getImagen();
+                            + condenado.getImagen()+"•";
+                    for (int i = 0; i < condenado.getDebilidades().size(); i++) {
+                        nuevo_contenido = nuevo_contenido + condenado.getDebilidades().get(i) + "○";
+                    }
+                    nuevo_contenido = nuevo_contenido + "•"
+                            +condenado.getTipo()[0]+"•"
+                            +condenado.getTipo()[1];
                 } else {
                     nuevo_contenido = nuevo_contenido + "☼" + temporal;
                 }
@@ -296,7 +325,13 @@ public class TDA_Archivo {
                             + modificado.getDefensa_Especial() + "•"
                             + modificado.getVelocidad() + "•"
                             + modificado.getEvolucion() + "•"
-                            + modificado.getImagen();
+                            + modificado.getImagen()+"•";
+                    for (int i = 0; i < modificado.getDebilidades().size(); i++) {
+                        nuevo_contenido = nuevo_contenido + modificado.getDebilidades().get(i) + "○";
+                    }
+                    nuevo_contenido = nuevo_contenido + "•"
+                            +modificado.getTipo()[0]+"•"
+                            +modificado.getTipo()[1];
                 } else {
                     nuevo_contenido = nuevo_contenido + "☼" + temporal;
                 }
@@ -319,14 +354,14 @@ public class TDA_Archivo {
     public void Compactar() throws FileNotFoundException {
         Scanner contenido = new Scanner(Archivo);
         contenido.useDelimiter("☼");
-        String nuevo_contenido="";
+        String nuevo_contenido = "";
         while (contenido.hasNext()) {
             String temporal = contenido.next();
             Scanner revision = new Scanner(temporal);
             revision.useDelimiter("•");
             String disponible = revision.next();
             if (disponible.equals("0")) {
-                nuevo_contenido=nuevo_contenido+"☼"+temporal;
+                nuevo_contenido = nuevo_contenido + "☼" + temporal;
             }
         }
         FileWriter filewriter = null;
@@ -380,6 +415,5 @@ public class TDA_Archivo {
     public String toString() {
         return "TDA_Archivo{" + "Archivo=" + Archivo + ", Borrados=" + Borrados + ", Sizes_Borrados=" + Sizes_Borrados + '}';
     }
-    
-    
+
 }

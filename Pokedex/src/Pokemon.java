@@ -30,9 +30,11 @@ class Pokemon {
     private int Velocidad;
     private String Evolucion;
     private Object Imagen;
+    private ArrayList<String> Debilidades=new ArrayList<String>();
+    private String[] tipo=new String[2];
 
-    public Pokemon(int Disponible,String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
-        this.Disponible=Disponible;
+    public Pokemon(int Disponible, String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
+        this.Disponible = Disponible;
         this.Nombre = Nombre;
         this.Apodo = Apodo;
         this.Descripcion = Descripcion;
@@ -50,6 +52,22 @@ class Pokemon {
         this.Imagen = Imagen;
     }
 
+    public ArrayList<String> getDebilidades() {
+        return Debilidades;
+    }
+
+    public void setDebilidades(ArrayList<String> Debilidades) {
+        this.Debilidades = Debilidades;
+    }
+
+    public String[] getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String[] tipo) {
+        this.tipo = tipo;
+    }
+    
     public int getDisponible() {
         return Disponible;
     }
