@@ -1053,14 +1053,14 @@ public class Main extends javax.swing.JFrame {
             
             BufferedWriter bfwriter = new BufferedWriter(FileWriter(flwriter));
             //bfwriter.append(tfr_usuario.getText());
-            bfwriter.write(tfr_usuario.getText());
-            bfwriter.newLine();
+            bfwriter.write(tfr_usuario.getText()+"\n");
+            //bfwriter.newLine();
             //bfwriter.append(tfr_contraseña.getText());
-            bfwriter.write(tfr_contraseña.getText());
-            bfwriter.newLine();
+            bfwriter.write(tfr_contraseña.getText()+"\n");
+            //bfwriter.newLine();
             //bfwriter.append((String) jsr_edad.getValue());
-            bfwriter.write((String) jsr_edad.getValue());
-            bfwriter.newLine();
+            bfwriter.write((String) jsr_edad.getValue()+"\n");
+            //bfwriter.newLine();
             bfwriter.write(tfr_nombre.getText());
             //bfwriter.append(tfr_nombre.getText());
             //bfwriter.write(tfr_usuario.getText());
