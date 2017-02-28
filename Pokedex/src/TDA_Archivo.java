@@ -26,8 +26,9 @@ public class TDA_Archivo {
     public TDA_Archivo() {
     }
 
-    public TDA_Archivo(File Archivo) {
+    public TDA_Archivo(File Archivo, File Borrados_file) {
         this.Archivo = Archivo;
+        this.Borrados_file = Borrados_file;
     }
 
     public void Agregar(Pokemon nuevo, int size) throws FileNotFoundException {
@@ -248,7 +249,7 @@ public class TDA_Archivo {
                 int Defensa_Especial = Integer.parseInt(revision.next());
                 int Velocidad = Integer.parseInt(revision.next());
                 String Evolucion = revision.next();
-                Object Imagen = revision.next();
+                String Imagen = revision.next();
                 Scanner debil = new Scanner(revision.next());
                 ArrayList<String> Debilidades = new ArrayList<String>();
                 debil.useDelimiter("○");
@@ -478,7 +479,7 @@ public class TDA_Archivo {
             int Defensa_Especial = Integer.parseInt(temporal.next());
             int Velocidad = Integer.parseInt(temporal.next());
             String Evolucion = temporal.next();
-            Object Imagen = temporal.next();
+            String Imagen = temporal.next();
             Scanner debil = new Scanner(temporal.next());
             ArrayList<String> Debilidades = new ArrayList<String>();
             debil.useDelimiter("○");

@@ -3,7 +3,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -44,10 +50,10 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        tfr_nombre = new javax.swing.JTextField();
+        jsr_edad = new javax.swing.JSpinner();
+        tfr_usuario = new javax.swing.JTextField();
+        tfr_contraseña = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         back_register = new javax.swing.JLabel();
@@ -76,7 +82,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tf_descripcion = new javax.swing.JTextArea();
         js_altura = new javax.swing.JSpinner();
-        js_categoria = new javax.swing.JTextField();
+        tf_categoria = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         cb_tipo = new javax.swing.JComboBox<>();
@@ -104,6 +110,7 @@ public class Main extends javax.swing.JFrame {
         imgPokemon = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -183,14 +190,19 @@ public class Main extends javax.swing.JFrame {
 
         jLabel6.setText("Contraseña");
         jd_register.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 80, -1));
-        jd_register.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 180, -1));
+        jd_register.getContentPane().add(tfr_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 180, -1));
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
-        jd_register.getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
-        jd_register.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 180, -1));
-        jd_register.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 180, -1));
+        jsr_edad.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
+        jd_register.getContentPane().add(jsr_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+        jd_register.getContentPane().add(tfr_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 180, -1));
+        jd_register.getContentPane().add(tfr_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 180, -1));
 
         jButton3.setText("Registrar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jd_register.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
         jLabel7.setText("Bienvenido al Sistema de Registro del Pueblo Palleta");
@@ -256,8 +268,18 @@ public class Main extends javax.swing.JFrame {
         cb_debilidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acero", "Agua", "Bicho", "Dragon", "Electrico", "Fantasma", "Fuego", "Hada", "Hielo", "Lucha", "Normal", "Planta", "Psiquico", "Tierra", "Roca", "Siniestro", "Veneno", "Volador", "???" }));
 
         jButton4.setText("Añadir");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setText("Añadir");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         jLabel20.setText("HP");
 
@@ -305,6 +327,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton12.setText("Guardar");
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -331,7 +360,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(js_altura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel17))
-                            .addComponent(js_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rd_hombre)
@@ -381,16 +410,19 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(js_ataque)
-                    .addComponent(js_hp)
-                    .addComponent(js_defensa)
-                    .addComponent(js_ataqueEspecial)
-                    .addComponent(js_defensaEspecial)
-                    .addComponent(js_velocidad)
-                    .addComponent(tf_evolucion))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(js_ataque)
+                            .addComponent(js_hp)
+                            .addComponent(js_defensa)
+                            .addComponent(js_ataqueEspecial)
+                            .addComponent(js_defensaEspecial)
+                            .addComponent(js_velocidad)
+                            .addComponent(tf_evolucion))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton12))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -431,7 +463,7 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(js_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
@@ -494,7 +526,9 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(tf_evolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jSeparator3))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton11)
+                            .addComponent(jButton12))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -884,10 +918,22 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.jd_register.pack();
-        this.jd_register.setModal(true);
+        File file = new File("./"+tf_user.getText()+"/"+tf_user.getText()+".txt");
+        
+        Scanner scan;
+        
+        try {
+            scan = new Scanner(file);
+            while(scan.hasNextLine()){
+                
+            }
+        } catch (Exception e) {
+        }
+        
+        this.jd_Interface.pack();
+        this.jd_Interface.setModal(true);
         this.setLocationRelativeTo(this);
-        this.jd_register.setVisible(true);
+        this.jd_Interface.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -898,7 +944,7 @@ public class Main extends javax.swing.JFrame {
         int regresaValor = fileChooser.showOpenDialog(null);
         if (regresaValor == JFileChooser.APPROVE_OPTION) {
             File archivoElegido = fileChooser.getSelectedFile();
-            String direccion = archivoElegido.getPath();
+            direccion = archivoElegido.getPath();
             try {
                 ImageIcon icon = new ImageIcon(direccion);
                 imgPokemon.setIcon(icon);
@@ -931,6 +977,116 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        String nombre = tf_nombre.getText();
+        String apodo = tf_apodo.getText();
+        String descripcion = tf_descripcion.getText();
+        double altura = (double) js_altura.getValue();
+        //String alt = (String) js_altura.getValue();
+        String categoria = tf_categoria.getText();
+        double peso = (double) js_altura.getValue();
+        String genero;
+        if (rd_hombre.isSelected()) {
+            genero = rd_hombre.getText();
+        }else if (rd_mujer.isSelected()) {
+            genero = rd_mujer.getText();
+        }else{
+            genero = rd_Shyny.getText();
+        }
+        ArrayList<String> hab = new ArrayList();
+        hab.add(tf_habilidad1.getText());
+        hab.add(tf_habilidad2.getText());
+        hab.add(tf_habilidad3.getText());
+        
+        
+        int vida = (int) js_hp.getValue();
+        int ataque = (int) js_ataque.getValue();
+        int defensa = (int) js_defensa.getValue();
+        int ataqueEspecial = (int) js_ataqueEspecial.getValue();
+        int defensaEspecial = (int) js_defensaEspecial.getValue();
+        int velocidad = (int) js_velocidad.getValue();
+        String evolucion = tf_evolucion.getText();
+        
+        if (tipo[2].equals(null)) {
+            tipo[2] = " ";
+        }
+        
+        
+        pokemon = new Pokemon(0, nombre, apodo, descripcion, altura, categoria, peso, genero, vida, ataque, defensa, ataqueEspecial, defensaEspecial, velocidad, evolucion, direccion);
+        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero +tf_habilidad1.getText()+tf_habilidad2.getText()+tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
+        try {
+            usuario.getPokedex().Agregar(pokemon, total.length());
+        } catch (FileNotFoundException ex) {
+        }
+        
+    }//GEN-LAST:event_jButton12MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        if (cont == 2) {
+            JOptionPane.showMessageDialog(null, "Ha alcanzado el limite de habilidades");
+        }else if(cont == 0){
+            String tipos = cb_tipo.getSelectedItem().toString();
+            tipo[0]=tipos;
+            cont++;
+        }else if(cont == 1){
+            String tipos = cb_tipo.getSelectedItem().toString();
+            tipo[1]=tipos;
+            cont++;
+        }
+        
+       
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        
+        debilidades.add(cb_debilidades.getSelectedItem().toString());
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    File file = new File("./"+ tfr_usuario.getText());
+    file.mkdir();
+    
+    File flwriter = null;
+        try {
+            flwriter = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
+            
+            BufferedWriter bfwriter = new BufferedWriter(FileWriter(flwriter));
+            //bfwriter.append(tfr_usuario.getText());
+            bfwriter.write(tfr_usuario.getText());
+            bfwriter.newLine();
+            //bfwriter.append(tfr_contraseña.getText());
+            bfwriter.write(tfr_contraseña.getText());
+            bfwriter.newLine();
+            //bfwriter.append((String) jsr_edad.getValue());
+            bfwriter.write((String) jsr_edad.getValue());
+            bfwriter.newLine();
+            bfwriter.write(tfr_nombre.getText());
+            //bfwriter.append(tfr_nombre.getText());
+            //bfwriter.write(tfr_usuario.getText());
+            //bfwriter.write(tfr_contraseña.getText());
+            //bfwriter.write((String) jsr_edad.getValue());
+            //bfwriter.write(tfr_nombre.getText());
+            
+            bfwriter.close();
+            JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
+        }finally{
+            if (flwriter != null) {
+                try {
+                    
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    
+    //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
+        
+    
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -980,6 +1136,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1050,18 +1207,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JComboBox<String> jb_Eliminar;
     private javax.swing.JDialog jd_Interface;
     private javax.swing.JDialog jd_register;
     private javax.swing.JSpinner js_altura;
     private javax.swing.JSpinner js_ataque;
     private javax.swing.JSpinner js_ataqueEspecial;
-    private javax.swing.JTextField js_categoria;
     private javax.swing.JSpinner js_defensa;
     private javax.swing.JSpinner js_defensaEspecial;
     private javax.swing.JSpinner js_hp;
@@ -1075,6 +1227,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner jsm_defensaEspecial;
     private javax.swing.JSpinner jsm_hp;
     private javax.swing.JSpinner jsm_velocidad;
+    private javax.swing.JSpinner jsr_edad;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JRadioButton rd_Shyny;
     private javax.swing.JRadioButton rd_hombre;
@@ -1084,6 +1237,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdm_Shyny;
     private javax.swing.JTextArea tam_Descripcion;
     private javax.swing.JTextField tf_apodo;
+    private javax.swing.JTextField tf_categoria;
     private javax.swing.JTextArea tf_descripcion;
     private javax.swing.JTextField tf_evolucion;
     private javax.swing.JTextField tf_evoluciones;
@@ -1098,5 +1252,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tfm_habilidad1;
     private javax.swing.JTextField tfm_habilidad2;
     private javax.swing.JTextField tfm_habilidad3;
+    private javax.swing.JTextField tfr_contraseña;
+    private javax.swing.JTextField tfr_nombre;
+    private javax.swing.JTextField tfr_usuario;
     // End of variables declaration//GEN-END:variables
+
+    TDA_Archivo archivo = new TDA_Archivo();
+    Pokemon pokemon;
+    String[] tipo = new String[2];
+    ArrayList<String> debilidades = new ArrayList();
+    int cont = 0;
+    String direccion;
+    String total;
+    User usuario;
+
+    private Writer FileWriter(File flwriter) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

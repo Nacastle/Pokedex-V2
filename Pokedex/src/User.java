@@ -28,12 +28,14 @@ public class User {
 
     public User(int age, String Name, String user, String password) {
         File x = new File(user);
+        File y = new File(user);
         try {
             x.createNewFile();
+            y.createNewFile();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Algo Exploto");
         }
-        this.pokedex = new TDA_Archivo(x);
+        this.pokedex = new TDA_Archivo(x,y);
         this.age = age;
         this.Name = Name;
         this.user = user;

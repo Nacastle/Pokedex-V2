@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Alexis
  */
 class Pokemon {
+
     private int Disponible;
     private String Nombre;
     private String Apodo;
@@ -21,7 +21,7 @@ class Pokemon {
     private String Categoria;
     private double Peso;
     private String genero;
-    private ArrayList<String> Habilidades=new ArrayList<String>();
+    private ArrayList<String> Habilidades = new ArrayList<String>();
     private int Hp;
     private int Ataque;
     private int Defensa;
@@ -29,11 +29,11 @@ class Pokemon {
     private int Defensa_Especial;
     private int Velocidad;
     private String Evolucion;
-    private Object Imagen;
-    private ArrayList<String> Debilidades=new ArrayList<String>();
-    private String[] tipo=new String[2];
-    
-    public Pokemon(int Disponible, String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, Object Imagen) {
+    private String Imagen;
+    private ArrayList<String> Debilidades = new ArrayList<String>();
+    private String[] tipo = new String[2];
+
+    public Pokemon(int Disponible, String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, String Imagen) {
         this.Disponible = Disponible;
         this.Nombre = Nombre;
         this.Apodo = Apodo;
@@ -67,7 +67,7 @@ class Pokemon {
     public void setTipo(String[] tipo) {
         this.tipo = tipo;
     }
-    
+
     public int getDisponible() {
         return Disponible;
     }
@@ -75,7 +75,7 @@ class Pokemon {
     public void setDisponible(int Disponible) {
         this.Disponible = Disponible;
     }
-    
+
     public String getNombre() {
         return Nombre;
     }
@@ -200,7 +200,7 @@ class Pokemon {
         return Imagen;
     }
 
-    public void setImagen(Object Imagen) {
+    public void setImagen(String Imagen) {
         this.Imagen = Imagen;
     }
 
@@ -208,6 +208,5 @@ class Pokemon {
     public String toString() {
         return "Pokemon{" + "Nombre=" + Nombre + ", Apodo=" + Apodo + ", Descripcion=" + Descripcion + ", Altura=" + Altura + ", Categoria=" + Categoria + ", Peso=" + Peso + ", genero=" + genero + ", Habilidades=" + Habilidades + ", Hp=" + Hp + ", Ataque=" + Ataque + ", Defensa=" + Defensa + ", Ataque_Especial=" + Ataque_Especial + ", Defensa_Especial=" + Defensa_Especial + ", Velocidad=" + Velocidad + ", Evolucion=" + Evolucion + ", Imagen=" + Imagen + '}';
     }
-    
-    
+
 }
