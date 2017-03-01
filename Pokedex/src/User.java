@@ -27,8 +27,8 @@ public class User {
     }
 
     public User(int age, String Name, String user, String password) {
-        File x = new File(user);
-        File y = new File(user);
+        File x = new File("./"+user+"/"+user+"_poke.txt");
+        File y = new File("./"+user+"/"+user+"_pokeb.txt");
         try {
             x.createNewFile();
             y.createNewFile();

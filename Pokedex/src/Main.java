@@ -926,7 +926,11 @@ public class Main extends javax.swing.JFrame {
                 contenido.useDelimiter("•");
                 String user = contenido.next();
                 String password = contenido.next();
+                int age=Integer.parseInt(contenido.next());
+                String nombre=contenido.next();
+                User entrada=new User(age,nombre,user,password);
                 if (user.equals(tf_user.getText()) && password.equals(pf_password.getText())) {
+                    usuario=entrada;
                     this.jd_Interface.pack();
                     this.jd_Interface.setModal(true);
                     this.setLocationRelativeTo(this);
@@ -1026,6 +1030,7 @@ public class Main extends javax.swing.JFrame {
         pokemon.setHabilidades(hab);
         pokemon.setTipo(tempo_tipo);
         pokemon.setDebilidades(tempo_debil);
+        
         total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tf_habilidad1.getText() + tf_habilidad2.getText() + tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
         
         String us = usuario.getUser();
