@@ -60,6 +60,12 @@ public class Main extends javax.swing.JFrame {
         jd_Interface = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        cb_pokedex = new javax.swing.JComboBox<>();
+        jButton13 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        back_transferir = new javax.swing.JLabel();
         back_listar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -168,7 +174,6 @@ public class Main extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         back_Eliminar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        back_transferir = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -215,9 +220,33 @@ public class Main extends javax.swing.JFrame {
         jd_register.getContentPane().add(back_register, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel5.add(back_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
+
+        jLabel27.setText("Seleccione al Pokemon");
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+
+        cb_pokedex.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_pokedexItemStateChanged(evt);
+            }
+        });
+        jPanel5.add(cb_pokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 270, -1));
+
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 160, 80));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 480, 380));
+        jPanel5.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Pokedex", jPanel5);
+        jTabbedPane1.addTab("tab6", back_listar);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -529,8 +558,6 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("Eliminar", jPanel3);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
-
         jTabbedPane1.addTab("Transferir", jPanel4);
 
         jMenu1.setText("File");
@@ -803,7 +830,8 @@ public class Main extends javax.swing.JFrame {
         } finally {
             if (flwriter != null) {
                 try {
-
+                    bfwriter.close();
+                    flwriter.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -813,6 +841,14 @@ public class Main extends javax.swing.JFrame {
         //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
 
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void cb_pokedexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_pokedexItemStateChanged
+        cb_pokedex.getSelectedItem();
+    }//GEN-LAST:event_cb_pokedexItemStateChanged
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        cb_pokedex.getSelectedItem();
+    }//GEN-LAST:event_jButton13MouseClicked
 
     /**
      * @param args the command line arguments
@@ -860,6 +896,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bg_Genero;
     private javax.swing.ButtonGroup bgm_Genero;
     private javax.swing.JComboBox<String> cb_debilidades;
+    private javax.swing.JComboBox<String> cb_pokedex;
     private javax.swing.JComboBox<String> cb_tipo;
     private javax.swing.JComboBox<String> cbm_Debilidades;
     private javax.swing.JComboBox<String> cbm_Tipo;
@@ -868,6 +905,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -895,6 +933,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -932,6 +971,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -939,6 +979,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> jb_Eliminar;
     private javax.swing.JDialog jd_Interface;
     private javax.swing.JDialog jd_register;
