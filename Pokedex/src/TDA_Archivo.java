@@ -46,39 +46,44 @@ public class TDA_Archivo {
             direccion = direccion + "☼" + temporal;
         }*/
         ArrayList<Pokemon> Disponibles = Prioridad();
-        String size_mayor = "" + Disponibles.get(0).getDisponible()
-                + Disponibles.get(0).getNombre()
-                + Disponibles.get(0).getApodo()
-                + Disponibles.get(0).getDescripcion()
-                + Disponibles.get(0).getAltura()
-                + Disponibles.get(0).getCategoria()
-                + Disponibles.get(0).getPeso()
-                + Disponibles.get(0).getGenero();
-        for (int j = 0; j < Disponibles.get(0).getHabilidades().size(); j++) {
-            size_mayor = size_mayor + Disponibles.get(0).getHabilidades().get(j);
+        int mayor = 0;
+        int posicion = 0;
+        if (Disponibles.size() != 0) {
+            String size_mayor = "" + Disponibles.get(0).getDisponible()
+                    + Disponibles.get(0).getNombre()
+                    + Disponibles.get(0).getApodo()
+                    + Disponibles.get(0).getDescripcion()
+                    + Disponibles.get(0).getAltura()
+                    + Disponibles.get(0).getCategoria()
+                    + Disponibles.get(0).getPeso()
+                    + Disponibles.get(0).getGenero();
+            for (int j = 0; j < Disponibles.get(0).getHabilidades().size(); j++) {
+                size_mayor = size_mayor + Disponibles.get(0).getHabilidades().get(j);
+            }
+            size_mayor = size_mayor
+                    + Disponibles.get(0).getHp()
+                    + Disponibles.get(0).getAtaque()
+                    + Disponibles.get(0).getDefensa()
+                    + Disponibles.get(0).getAtaque_Especial()
+                    + Disponibles.get(0).getDefensa_Especial()
+                    + Disponibles.get(0).getVelocidad()
+                    + Disponibles.get(0).getEvolucion()
+                    + Disponibles.get(0).getImagen();
+            for (int i = 0; i < Disponibles.get(0).getDebilidades().size(); i++) {
+                size_mayor = size_mayor + Disponibles.get(0).getDebilidades().get(i);
+            }
+            size_mayor = size_mayor
+                    + Disponibles.get(0).getTipo()[0]
+                    + Disponibles.get(0).getTipo()[1];
+            //
+            mayor = size_mayor.length();
+            posicion = Buscar(Disponibles.get(0));
         }
-        size_mayor = size_mayor
-                + Disponibles.get(0).getHp()
-                + Disponibles.get(0).getAtaque()
-                + Disponibles.get(0).getDefensa()
-                + Disponibles.get(0).getAtaque_Especial()
-                + Disponibles.get(0).getDefensa_Especial()
-                + Disponibles.get(0).getVelocidad()
-                + Disponibles.get(0).getEvolucion()
-                + Disponibles.get(0).getImagen();
-        for (int i = 0; i < Disponibles.get(0).getDebilidades().size(); i++) {
-            size_mayor = size_mayor + Disponibles.get(0).getDebilidades().get(i);
-        }
-        size_mayor = size_mayor
-                + Disponibles.get(0).getTipo()[0]
-                + Disponibles.get(0).getTipo()[1];
-        //
-        int mayor = size_mayor.length();
-        int posicion = Buscar(Disponibles.get(0));
         Scanner contenido = new Scanner(Archivo);
         contenido.useDelimiter("☼");
         String borrados = "";
         if (mayor >= size) {
+            System.out.println("1");
             String nuevo_contenido = "";
             while (contenido.hasNext()) {
                 String temporal = contenido.next();
@@ -141,6 +146,7 @@ public class TDA_Archivo {
 
             }
         } else {
+            System.out.println("2");
             String nuevo_contenido = "";
             while (contenido.hasNext()) {
                 String temporal = contenido.next();
@@ -177,16 +183,26 @@ public class TDA_Archivo {
             nuevo_contenido = nuevo_contenido + "•"
                     + nuevo.getTipo()[0] + "•"
                     + nuevo.getTipo()[1];
-
+            System.out.println(nuevo_contenido);
             FileWriter filewriter = null;
             BufferedWriter bufferedwriter = null;
             try {
                 filewriter = new FileWriter(Archivo, false);
                 bufferedwriter = new BufferedWriter(filewriter);
                 bufferedwriter.write(nuevo_contenido);
+                bufferedwriter.flush();
             } catch (Exception e) {
-
+                e.printStackTrace();
+            } finally {
+                try {
+                    filewriter.close();
+                    bufferedwriter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            
+            JOptionPane.showMessageDialog(null, "Listo para embarcarte en una nueva Aventura");
         }
         FileWriter filewriter = null;
         BufferedWriter bufferedwriter = null;
@@ -197,7 +213,7 @@ public class TDA_Archivo {
         } catch (Exception e) {
 
         }
-        JOptionPane.showMessageDialog(null, "Listo para embarcarte en una nueva Aventura");
+
     }
 
     public int Buscar(Pokemon buscado) throws FileNotFoundException {
@@ -324,15 +340,15 @@ public class TDA_Archivo {
         } catch (Exception e) {
 
         }
-        Scanner actualizar=new Scanner(nuevo_contenido);
+        Scanner actualizar = new Scanner(nuevo_contenido);
         actualizar.useDelimiter("☼");
         String borrados = "";
-        while(actualizar.hasNext()){
-            String temporal=actualizar.next();
-            Scanner revisar=new Scanner(temporal);
+        while (actualizar.hasNext()) {
+            String temporal = actualizar.next();
+            Scanner revisar = new Scanner(temporal);
             revisar.useDelimiter("•");
             if (revisar.next().equals("1")) {
-                borrados=borrados+"☼"+temporal;
+                borrados = borrados + "☼" + temporal;
             }
         }
         FileWriter filewriter1 = null;
@@ -344,7 +360,7 @@ public class TDA_Archivo {
         } catch (Exception e) {
 
         }
-        
+
     }
 
     public void Modificar(Pokemon Original, Pokemon modificado) throws FileNotFoundException {
@@ -435,7 +451,7 @@ public class TDA_Archivo {
         } catch (Exception e) {
 
         }
-        
+
     }
 
     public void Eliminar() {
