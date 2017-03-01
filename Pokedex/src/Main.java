@@ -161,6 +161,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel47 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         back_modificar = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jb_Eliminar = new javax.swing.JComboBox<>();
@@ -505,12 +506,13 @@ public class Main extends javax.swing.JFrame {
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 44, -1, 236));
-
-        jLabel47.setText("Img");
         jPanel2.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(643, 44, 253, 178));
 
         jButton9.setText("Cargar Imagen");
         jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 240, -1, -1));
+
+        jButton11.setText("Guardar cambios");
+        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
         jPanel2.add(back_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Modificar", jPanel2);
@@ -614,27 +616,27 @@ public class Main extends javax.swing.JFrame {
                 User entrada = new User(age, nombre, user, password);
                 if (user.equals(tf_user.getText()) && password.equals(pf_password.getText())) {
                     usuario = entrada;
-                    
+
                     File n = new File("./pokemon-wallpaper-hd-13.jpg");
                     Image img = Toolkit.getDefaultToolkit().createImage(n.getPath()).getScaledInstance(900, 460, 0);
                     back_agregar.setIcon(new ImageIcon(img));
-                    
+
                     File a = new File("./Pikachu-Wallpaper-HD-1024x576.png");
                     Image imga = Toolkit.getDefaultToolkit().createImage(a.getPath()).getScaledInstance(900, 460, 0);
                     back_Eliminar.setIcon(new ImageIcon(imga));
-                    
+
                     File a1 = new File("./pokemon_136497.jpg");
                     Image imga1 = Toolkit.getDefaultToolkit().createImage(a1.getPath()).getScaledInstance(900, 460, 0);
                     back_listar.setIcon(new ImageIcon(imga1));
-                    
+
                     File a2 = new File("./cc6d9fffa96d27971b10878869f550e9.jpg");
                     Image imga2 = Toolkit.getDefaultToolkit().createImage(a2.getPath()).getScaledInstance(900, 460, 0);
                     back_modificar.setIcon(new ImageIcon(imga2));
-                    
+
                     File a3 = new File("./Pokemon-Go-Pikachu-in-Pokeballs-HD-Wallpaper.jpg");
                     Image imga3 = Toolkit.getDefaultToolkit().createImage(a3.getPath()).getScaledInstance(900, 460, 0);
                     back_transferir.setIcon(new ImageIcon(imga3));
-                    
+
                     this.jd_Interface.pack();
                     this.jd_Interface.setModal(true);
                     this.setLocationRelativeTo(this);
@@ -721,6 +723,30 @@ public class Main extends javax.swing.JFrame {
             usuario.pokedex.Agregar(pokemon, total.length());
             //usuario.getPokedex().Agregar(pokemon, total.length());
             JOptionPane.showMessageDialog(null, "Se guardo exitosamente el puchamon");
+
+            tf_nombre.setText("");
+            tf_apodo.setText("");
+            tf_descripcion.setText("");
+            js_altura.setValue(1);
+            tf_categoria.setText("");
+            js_altura.setValue(1);
+            rd_hombre.setSelected(true);
+            tf_habilidad1.setText("");
+            tf_habilidad1.setText("");
+            tf_habilidad1.setText("");
+            hab = new ArrayList();
+            tempo_debil = debilidades = new ArrayList();
+            tempo_tipo = new String[2];
+            
+            js_hp.setValue(1);
+            js_ataque.setValue(1);
+            js_defensa.setValue(1);
+            js_ataqueEspecial.setValue(1);
+            js_defensaEspecial.setValue(1);
+            js_velocidad.setValue(1);
+            tf_evolucion.setText("");
+            imgPokemon.setIcon(null);
+            
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -774,6 +800,10 @@ public class Main extends javax.swing.JFrame {
             //bfwriter.write(tfr_nombre.getText());
 
             bfwriter.close();
+            tfr_nombre.setText("");
+            tfr_usuario.setText("");
+            tfr_contraseña.setText("");
+            jsr_edad.setValue(10);
             JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
@@ -843,6 +873,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel imgPokemon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
