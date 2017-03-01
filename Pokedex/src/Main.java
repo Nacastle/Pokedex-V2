@@ -918,22 +918,30 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        File file = new File("./"+tf_user.getText()+"/"+tf_user.getText()+".txt");
-        
-        Scanner scan;
-        
-        try {
-            scan = new Scanner(file);
-            while(scan.hasNextLine()){
-                
+        File file = new File("./" + tf_user.getText() + "/" + tf_user.getText() + ".txt");
+
+        if (file.exists()) {
+            try {
+                Scanner contenido = new Scanner(file);
+                contenido.useDelimiter("•");
+                String user = contenido.next();
+                String password = contenido.next();
+                if (user.equals(tf_user.getText()) && password.equals(pf_password.getText())) {
+                    this.jd_Interface.pack();
+                    this.jd_Interface.setModal(true);
+                    this.setLocationRelativeTo(this);
+                    this.jd_Interface.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al ingresar el usuario o password");
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception e) {
+        }else{
+            
         }
-        
-        this.jd_Interface.pack();
-        this.jd_Interface.setModal(true);
-        this.setLocationRelativeTo(this);
-        this.jd_Interface.setVisible(true);
+
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -989,17 +997,16 @@ public class Main extends javax.swing.JFrame {
         String genero;
         if (rd_hombre.isSelected()) {
             genero = rd_hombre.getText();
-        }else if (rd_mujer.isSelected()) {
+        } else if (rd_mujer.isSelected()) {
             genero = rd_mujer.getText();
-        }else{
+        } else {
             genero = rd_Shyny.getText();
         }
         ArrayList<String> hab = new ArrayList();
         hab.add(tf_habilidad1.getText());
         hab.add(tf_habilidad2.getText());
         hab.add(tf_habilidad3.getText());
-        
-        
+
         int vida = (int) js_hp.getValue();
         int ataque = (int) js_ataque.getValue();
         int defensa = (int) js_defensa.getValue();
@@ -1007,53 +1014,62 @@ public class Main extends javax.swing.JFrame {
         int defensaEspecial = (int) js_defensaEspecial.getValue();
         int velocidad = (int) js_velocidad.getValue();
         String evolucion = tf_evolucion.getText();
-        
-        if (tipo[2].equals(null)) {
-            tipo[2] = " ";
+
+        if (tipo[1].equals("")) {
+            tipo[1] = " ";
         }
+        String[] tempo_tipo=new String[2];
+        ArrayList<String> tempo_debil=debilidades;
+        tempo_tipo=tipo;
         
-        
-        pokemon = new Pokemon(0, nombre, apodo, descripcion, altura, categoria, peso, genero, vida, ataque, defensa, ataqueEspecial, defensaEspecial, velocidad, evolucion, direccion);
-        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero +tf_habilidad1.getText()+tf_habilidad2.getText()+tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
+        pokemon = new Pokemon(0, nombre, apodo, descripcion, (double) js_altura.getValue(), categoria, (double) js_peso.getValue(), genero, (int) js_hp.getValue(), (int) js_ataque.getValue(), (int) js_defensa.getValue(), (int) js_ataqueEspecial.getValue(), (int) js_defensaEspecial.getValue(), (int) js_velocidad.getValue(), evolucion, direccion);
+        pokemon.setHabilidades(hab);
+        pokemon.setTipo(tempo_tipo);
+        pokemon.setDebilidades(tempo_debil);
+        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tf_habilidad1.getText() + tf_habilidad2.getText() + tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
         try {
             usuario.getPokedex().Agregar(pokemon, total.length());
+            JOptionPane.showMessageDialog(null, "Se guardo exitosamente el puchamon");
         } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
         }
         
+        
+
     }//GEN-LAST:event_jButton12MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (cont == 2) {
             JOptionPane.showMessageDialog(null, "Ha alcanzado el limite de habilidades");
-        }else if(cont == 0){
+        } else if (cont == 0) {
             String tipos = cb_tipo.getSelectedItem().toString();
-            tipo[0]=tipos;
+            tipo[0] = tipos;
             cont++;
-        }else if(cont == 1){
+        } else if (cont == 1) {
             String tipos = cb_tipo.getSelectedItem().toString();
-            tipo[1]=tipos;
+            tipo[1] = tipos;
             cont++;
         }
-        
-       
+
+
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        
+
         debilidades.add(cb_debilidades.getSelectedItem().toString());
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-    File file = new File("./"+ tfr_usuario.getText());
-    file.mkdir();
-    
-    FileWriter flwriter = null;
-    BufferedWriter bfwriter =null;
+        File file = new File("./" + tfr_usuario.getText());
+        file.mkdir();
+
+        FileWriter flwriter = null;
+        BufferedWriter bfwriter = null;
         try {
-            flwriter = new FileWriter("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
-            
+            flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
+
             bfwriter = new BufferedWriter(flwriter);
-            String temporal=tfr_usuario.getText()+"•"+tfr_contraseña.getText()+"•"+jsr_edad.getValue()+"•"+tfr_nombre.getText();
+            String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
             //bfwriter.append(tfr_usuario.getText());
             bfwriter.write(temporal);
             //bfwriter.newLine();
@@ -1066,25 +1082,23 @@ public class Main extends javax.swing.JFrame {
             //bfwriter.write(tfr_contraseña.getText());
             //bfwriter.write((String) jsr_edad.getValue());
             //bfwriter.write(tfr_nombre.getText());
-            
+
             bfwriter.close();
             JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
-        }finally{
+        } finally {
             if (flwriter != null) {
                 try {
-                    
-                    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-    
-    //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
-        
-    
+
+        //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     /**
