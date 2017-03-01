@@ -737,7 +737,7 @@ public class Main extends javax.swing.JFrame {
             hab = new ArrayList();
             tempo_debil = debilidades = new ArrayList();
             tempo_tipo = new String[2];
-            
+
             js_hp.setValue(1);
             js_ataque.setValue(1);
             js_defensa.setValue(1);
@@ -746,7 +746,7 @@ public class Main extends javax.swing.JFrame {
             js_velocidad.setValue(1);
             tf_evolucion.setText("");
             imgPokemon.setIcon(null);
-            
+
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -782,29 +782,22 @@ public class Main extends javax.swing.JFrame {
         FileWriter flwriter = null;
         BufferedWriter bfwriter = null;
         try {
-            flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
+            if (file.exists()) {
+                JOptionPane.showMessageDialog(null, "El usuario Ya existe!");
+            } else {
+                flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
 
-            bfwriter = new BufferedWriter(flwriter);
-            String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
-            //bfwriter.append(tfr_usuario.getText());
-            bfwriter.write(temporal);
-            //bfwriter.newLine();
-            //bfwriter.append(tfr_contraseña.getText());
-            //bfwriter.newLine();
-            //bfwriter.append((String) jsr_edad.getValue());
-            //bfwriter.newLine();
-            //bfwriter.append(tfr_nombre.getText());
-            //bfwriter.write(tfr_usuario.getText());
-            //bfwriter.write(tfr_contraseña.getText());
-            //bfwriter.write((String) jsr_edad.getValue());
-            //bfwriter.write(tfr_nombre.getText());
-
-            bfwriter.close();
-            tfr_nombre.setText("");
-            tfr_usuario.setText("");
-            tfr_contraseña.setText("");
-            jsr_edad.setValue(10);
-            JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
+                bfwriter = new BufferedWriter(flwriter);
+                String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
+                //bfwriter.append(tfr_usuario.getText());
+                bfwriter.write(temporal);
+                bfwriter.close();
+                tfr_nombre.setText("");
+                tfr_usuario.setText("");
+                tfr_contraseña.setText("");
+                jsr_edad.setValue(10);
+                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
         } finally {
