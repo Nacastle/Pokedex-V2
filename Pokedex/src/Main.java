@@ -1027,8 +1027,14 @@ public class Main extends javax.swing.JFrame {
         pokemon.setTipo(tempo_tipo);
         pokemon.setDebilidades(tempo_debil);
         total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tf_habilidad1.getText() + tf_habilidad2.getText() + tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
+        
+        String us = usuario.getUser();
+        
+        JOptionPane.showMessageDialog(null, "Usuario conectado: "+us);
+        
         try {
-            usuario.getPokedex().Agregar(pokemon, total.length());
+            usuario.pokedex.Agregar(pokemon, total.length());
+            //usuario.getPokedex().Agregar(pokemon, total.length());
             JOptionPane.showMessageDialog(null, "Se guardo exitosamente el puchamon");
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
