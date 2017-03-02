@@ -621,7 +621,6 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel4.add(cb_mios, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, -1));
 
-        cb_usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cb_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cb_usuariosMouseClicked(evt);
@@ -964,6 +963,15 @@ public class Main extends javax.swing.JFrame {
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         try {
             usuario.getPokedex().Borrar((Pokemon) jb_Eliminar.getSelectedItem());
+            if (!prior.ColaVacia()) {
+                File brr = new File("./"+usuario.getUser()+"/"+usuario.getUser()+"_pokeb.txt");
+                ArrayList<String> nodos = new ArrayList();
+                
+                Scanner sc = new Scanner(brr);
+                sc.useDelimiter('');
+            }else{
+                
+            }
             JOptionPane.showMessageDialog(null, "Se ha liberado a su pokemon :(");
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Algo paso al Eliminar pokemon");
@@ -1334,4 +1342,6 @@ public class Main extends javax.swing.JFrame {
     private Writer FileWriter(File flwriter) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    Priority prior;
+    
 }
