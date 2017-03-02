@@ -33,6 +33,9 @@ class Pokemon {
     private ArrayList<String> Debilidades = new ArrayList<String>();
     private String[] tipo = new String[2];
 
+    public Pokemon() {
+    }
+    
     public Pokemon(int Disponible, String Nombre, String Apodo, String Descripcion, double Altura, String Categoria, double Peso, String genero, int Hp, int Ataque, int Defensa, int Ataque_Especial, int Defensa_Especial, int Velocidad, String Evolucion, String Imagen) {
         this.Disponible = Disponible;
         this.Nombre = Nombre;

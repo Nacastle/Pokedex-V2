@@ -20,15 +20,15 @@ public class TDA_Archivo {
 
     File Archivo;
     File Borrados_file;
-    private ArrayList<Integer> Borrados = new ArrayList();
-    private ArrayList<Integer> Sizes_Borrados = new ArrayList();
-
+    ArrayList<Pokemon> Disponibles = new ArrayList<Pokemon>();
+    Cola priority;
     public TDA_Archivo() {
     }
 
     public TDA_Archivo(File Archivo, File Borrados_file) {
         this.Archivo = Archivo;
         this.Borrados_file = Borrados_file;
+        this.cola();
     }
 
     public void Agregar(Pokemon nuevo, int size) throws FileNotFoundException {
@@ -45,7 +45,6 @@ public class TDA_Archivo {
             }
             direccion = direccion + "☼" + temporal;
         }*/
-        ArrayList<Pokemon> Disponibles = Prioridad();
         int mayor = 0;
         int posicion = 0;
         if (Disponibles.size() != 0) {
@@ -117,10 +116,13 @@ public class TDA_Archivo {
                             + nuevo.getTipo()[1];
 
                     if (mayor != size) {
-                        nuevo_contenido = nuevo_contenido + "☼1•1•1••••••○•••••••••○••";
-                        for (int i = 0; i < mayor - size - 3; i++) {
-                            nuevo_contenido = nuevo_contenido + " ";
+                        nuevo_contenido = nuevo_contenido + "☼1•"+posicion+"•"+posicion+"•0••0•••○•••••••••○••";
+                        String relleno="";
+                        for (int i = 0; i < mayor - size - 5; i++) {
+                            relleno = relleno + " ";
                         }
+                        nuevo_contenido = nuevo_contenido + relleno;
+                        Disponibles.add(new Pokemon(1,""+posicion,""+posicion,"",0,"",0,"",0,0,0,0,0,0,"",""));
                     }
                     String botar = contenido.next();
                 }
@@ -201,7 +203,7 @@ public class TDA_Archivo {
                     e.printStackTrace();
                 }
             }
-            
+
             JOptionPane.showMessageDialog(null, "Listo para embarcarte en una nueva Aventura");
         }
         FileWriter filewriter = null;
@@ -415,6 +417,7 @@ public class TDA_Archivo {
             filewriter = new FileWriter(Archivo, false);
             bufferedwriter = new BufferedWriter(filewriter);
             bufferedwriter.write(nuevo_contenido);
+            bufferedwriter.flush();
         } catch (Exception e) {
 
         }
@@ -527,33 +530,66 @@ public class TDA_Archivo {
         return lista_disponibles;
     }
 
+    public void cola() {
+        try {
+            Scanner contenido = new Scanner(this.Borrados_file);
+        contenido.useDelimiter("☼");
+        while (contenido.hasNext()) {
+            Scanner registros = new Scanner(contenido.next());
+            registros.useDelimiter("•");
+            String disponible = registros.next();
+            String Nombre = registros.next();
+            String Apodo = registros.next();
+            String Descripcion = registros.next();
+            double Altura = Double.parseDouble(registros.next());
+            String Categoria = registros.next();
+            double Peso = Double.parseDouble(registros.next());
+            String genero = registros.next();
+            Scanner hability = new Scanner(registros.next());
+            ArrayList<String> Habilidades = new ArrayList<String>();
+            hability.useDelimiter("○");
+            while (hability.hasNext()) {
+                Habilidades.add(hability.next());
+            }
+            int Hp = Integer.parseInt(registros.next());
+            int Ataque = Integer.parseInt(registros.next());
+            int Defensa = Integer.parseInt(registros.next());
+            int Ataque_Especial = Integer.parseInt(registros.next());
+            int Defensa_Especial = Integer.parseInt(registros.next());
+            int Velocidad = Integer.parseInt(registros.next());
+            String Evolucion = registros.next();
+            String Imagen = registros.next();
+            Scanner debil = new Scanner(registros.next());
+            ArrayList<String> Debilidades = new ArrayList<String>();
+            debil.useDelimiter("○");
+            while (hability.hasNext()) {
+                Debilidades.add(debil.next());
+            }
+            String tipo[] = new String[2];
+            tipo[0] = registros.next();
+            tipo[1] = registros.next();
+            Pokemon pokemon = new Pokemon(1, Nombre, Apodo, Descripcion, Altura, Categoria, Peso, genero, Hp, Ataque, Defensa, Ataque_Especial, Defensa_Especial, Velocidad, Evolucion, Imagen);
+            pokemon.setHabilidades(Habilidades);
+            pokemon.setDebilidades(Debilidades);
+            pokemon.setTipo(tipo);
+            Disponibles.add(pokemon);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void cola(Pokemon borrado) throws FileNotFoundException {
+
+    }
+
     public File getArchivo() {
         return Archivo;
     }
 
     public void setArchivo(File Archivo) {
         this.Archivo = Archivo;
-    }
-
-    public ArrayList<Integer> getBorrados() {
-        return Borrados;
-    }
-
-    public void setBorrados(ArrayList<Integer> Borrados) {
-        this.Borrados = Borrados;
-    }
-
-    public ArrayList<Integer> getSizes_Borrados() {
-        return Sizes_Borrados;
-    }
-
-    public void setSizes_Borrados(ArrayList<Integer> Sizes_Borrados) {
-        this.Sizes_Borrados = Sizes_Borrados;
-    }
-
-    @Override
-    public String toString() {
-        return "TDA_Archivo{" + "Archivo=" + Archivo + ", Borrados=" + Borrados + ", Sizes_Borrados=" + Sizes_Borrados + '}';
     }
 
 }
