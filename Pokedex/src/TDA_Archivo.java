@@ -219,15 +219,6 @@ public class TDA_Archivo {
 
             JOptionPane.showMessageDialog(null, "Listo para embarcarte en una nueva Aventura");
         }
-        FileWriter filewriter = null;
-        BufferedWriter bufferedwriter = null;
-        try {
-            filewriter = new FileWriter(Borrados_file, false);
-            bufferedwriter = new BufferedWriter(filewriter);
-            bufferedwriter.write(borrados);
-        } catch (Exception e) {
-
-        }
 
     }
 
@@ -360,26 +351,6 @@ public class TDA_Archivo {
         } catch (Exception e) {
 
         }
-        Scanner actualizar = new Scanner(nuevo_contenido);
-        actualizar.useDelimiter("☼");
-        String borrados = "";
-        while (actualizar.hasNext()) {
-            String temporal = actualizar.next();
-            Scanner revisar = new Scanner(temporal);
-            revisar.useDelimiter("•");
-            if (revisar.next().equals("1")) {
-                borrados = borrados + "☼" + temporal;
-            }
-        }
-        FileWriter filewriter1 = null;
-        BufferedWriter bufferedwriter1 = null;
-        try {
-            filewriter1 = new FileWriter(Borrados_file, false);
-            bufferedwriter1 = new BufferedWriter(filewriter1);
-            bufferedwriter1.write(borrados);
-        } catch (Exception e) {
-
-        }
 
     }
 
@@ -460,15 +431,7 @@ public class TDA_Archivo {
             filewriter = new FileWriter(Archivo, false);
             bufferedwriter = new BufferedWriter(filewriter);
             bufferedwriter.write(nuevo_contenido);
-        } catch (Exception e) {
-
-        }
-        FileWriter filewriter1 = null;
-        BufferedWriter bufferedwriter1 = null;
-        try {
-            filewriter1 = new FileWriter(Borrados_file, false);
-            bufferedwriter1 = new BufferedWriter(filewriter1);
-            bufferedwriter1.write("");
+            bufferedwriter.flush();
         } catch (Exception e) {
 
         }
@@ -482,12 +445,13 @@ public class TDA_Archivo {
             filewriter = new FileWriter(Archivo, false);
             bufferedwriter = new BufferedWriter(filewriter);
             bufferedwriter.write("");
+            bufferedwriter.flush();
         } catch (Exception e) {
 
         }
     }
 
-    public ArrayList<Pokemon> Prioridad() throws FileNotFoundException {
+    /*public ArrayList<Pokemon> Prioridad() throws FileNotFoundException {
         ArrayList<Pokemon> lista_disponibles = new ArrayList<Pokemon>();
         ArrayList<Integer> size_disponibles = new ArrayList<Integer>();
         Scanner disponibles = new Scanner(Borrados_file);
@@ -599,10 +563,6 @@ public class TDA_Archivo {
 
     }
      */
-    public void cola(Pokemon borrado) throws FileNotFoundException {
-
-    }
-
     public File getArchivo() {
         return Archivo;
     }
@@ -611,4 +571,19 @@ public class TDA_Archivo {
         this.Archivo = Archivo;
     }
 
+    @Override
+    public String toString() {
+        String contenido="";
+        try {
+            Scanner registro=new Scanner(Archivo);
+            registro.useDelimiter("☼");
+            while(registro.hasNext()){
+                contenido=contenido+"☼"+registro.next();
+            }
+        } catch (Exception e) {
+        }
+        
+        return contenido;
+    }
+     
 }
