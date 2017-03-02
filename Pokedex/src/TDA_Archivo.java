@@ -20,15 +20,16 @@ public class TDA_Archivo {
 
     File Archivo;
     File Borrados_file;
-    ArrayList<Pokemon> Disponibles = new ArrayList<Pokemon>();
-    Cola priority;
+    Priority Disponibles;
+
     public TDA_Archivo() {
     }
 
     public TDA_Archivo(File Archivo, File Borrados_file) {
         this.Archivo = Archivo;
         this.Borrados_file = Borrados_file;
-        this.cola();
+        Disponibles = new Priority();
+        //this.cola();
     }
 
     public void Agregar(Pokemon nuevo, int size) throws FileNotFoundException {
@@ -45,39 +46,60 @@ public class TDA_Archivo {
             }
             direccion = direccion + "☼" + temporal;
         }*/
-        int mayor = 0;
+ /*int mayor = 0;
         int posicion = 0;
-        if (Disponibles.size() != 0) {
-            String size_mayor = "" + Disponibles.get(0).getDisponible()
-                    + Disponibles.get(0).getNombre()
-                    + Disponibles.get(0).getApodo()
-                    + Disponibles.get(0).getDescripcion()
-                    + Disponibles.get(0).getAltura()
-                    + Disponibles.get(0).getCategoria()
-                    + Disponibles.get(0).getPeso()
-                    + Disponibles.get(0).getGenero();
-            for (int j = 0; j < Disponibles.get(0).getHabilidades().size(); j++) {
-                size_mayor = size_mayor + Disponibles.get(0).getHabilidades().get(j);
+        
+        if (!Disponibles.ColaVacia()) {
+            mayor=Disponibles.Priority().getPrioriedad();
+            posicion=(int)Disponibles.Priority().getNodo();
+        }*/
+
+        if (!Disponibles.ColaVacia()) {
+            ArrayList espacios = new ArrayList();
+            for (int i = 0; i < Disponibles.tamano(); i++) {
+                espacios.add(Disponibles.Priority().getNodo().toString());
+            }
+            
+            
+            
+            espacios.remove(0);
+        }else{
+            
+        }
+
+        /*
+        if (Disponibles.getHeaptamaño() != 0) {
+            String size_mayor = "" + ((Pokemon) Disponibles.get(0).getNodo()).getDisponible()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getNombre()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getApodo()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getDescripcion()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getAltura()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getCategoria()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getPeso()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getGenero();
+            for (int j = 0; j < ((Pokemon) Disponibles.get(0).getNodo()).getHabilidades().size(); j++) {
+                size_mayor = size_mayor + ((Pokemon) Disponibles.get(0).getNodo()).getHabilidades().get(j);
             }
             size_mayor = size_mayor
-                    + Disponibles.get(0).getHp()
-                    + Disponibles.get(0).getAtaque()
-                    + Disponibles.get(0).getDefensa()
-                    + Disponibles.get(0).getAtaque_Especial()
-                    + Disponibles.get(0).getDefensa_Especial()
-                    + Disponibles.get(0).getVelocidad()
-                    + Disponibles.get(0).getEvolucion()
-                    + Disponibles.get(0).getImagen();
-            for (int i = 0; i < Disponibles.get(0).getDebilidades().size(); i++) {
-                size_mayor = size_mayor + Disponibles.get(0).getDebilidades().get(i);
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getHp()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getAtaque()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getDefensa()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getAtaque_Especial()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getDefensa_Especial()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getVelocidad()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getEvolucion()
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getImagen();
+            for (int i = 0; i < ((Pokemon) Disponibles.get(0).getNodo()).getDebilidades().size(); i++) {
+                size_mayor = size_mayor + ((Pokemon) Disponibles.get(0).getNodo()).getDebilidades().get(i);
             }
             size_mayor = size_mayor
-                    + Disponibles.get(0).getTipo()[0]
-                    + Disponibles.get(0).getTipo()[1];
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getTipo()[0]
+                    + ((Pokemon) Disponibles.get(0).getNodo()).getTipo()[1];
             //
             mayor = size_mayor.length();
-            posicion = Buscar(Disponibles.get(0));
+            posicion = Buscar(((Pokemon) Disponibles.get(0).getNodo()));
         }
+         */
         Scanner contenido = new Scanner(Archivo);
         contenido.useDelimiter("☼");
         String borrados = "";
@@ -88,7 +110,8 @@ public class TDA_Archivo {
                 String temporal = contenido.next();
                 nuevo_contenido = nuevo_contenido + "☼" + temporal;
                 if (nuevo_contenido.length() == posicion) {
-                    nuevo_contenido = nuevo_contenido + "☼" + nuevo.getDisponible() + "•"
+                    nuevo_contenido = nuevo_contenido + "☼";
+                    String auxiliar = nuevo.getDisponible() + "•"
                             + nuevo.getNombre() + "•"
                             + nuevo.getApodo() + "•"
                             + nuevo.getDescripcion() + "•"
@@ -97,9 +120,9 @@ public class TDA_Archivo {
                             + nuevo.getPeso() + "•"
                             + nuevo.getGenero() + "•";
                     for (int j = 0; j < nuevo.getHabilidades().size(); j++) {
-                        nuevo_contenido = nuevo_contenido + nuevo.getHabilidades().get(j) + "○";
+                        auxiliar = auxiliar + nuevo.getHabilidades().get(j) + "○";
                     }
-                    nuevo_contenido = nuevo_contenido + "•"
+                    auxiliar = auxiliar + "•"
                             + nuevo.getHp() + "•"
                             + nuevo.getAtaque() + "•"
                             + nuevo.getDefensa() + "•"
@@ -109,22 +132,29 @@ public class TDA_Archivo {
                             + nuevo.getEvolucion() + "•"
                             + nuevo.getImagen() + "•";
                     for (int i = 0; i < nuevo.getDebilidades().size(); i++) {
-                        nuevo_contenido = nuevo_contenido + nuevo.getDebilidades().get(i) + "○";
+                        auxiliar = auxiliar + nuevo.getDebilidades().get(i) + "○";
                     }
-                    nuevo_contenido = nuevo_contenido + "•"
+                    auxiliar = auxiliar + "•"
                             + nuevo.getTipo()[0] + "•"
                             + nuevo.getTipo()[1];
-
-                    if (mayor != size) {
-                        nuevo_contenido = nuevo_contenido + "☼1•"+posicion+"•"+posicion+"•0••0•••○•••••••••○••";
-                        String relleno="";
+                    nuevo_contenido = nuevo_contenido + auxiliar;
+                    /*if (mayor != size) {
+                        nuevo_contenido = nuevo_contenido + "☼";
+                        nuevo_contenido = nuevo_contenido + "1•" + posicion + "•" + posicion + "•0••0•••○•••••••••○••";
+                        String relleno = "";
                         for (int i = 0; i < mayor - size - 5; i++) {
                             relleno = relleno + " ";
                         }
                         nuevo_contenido = nuevo_contenido + relleno;
-                        Disponibles.add(new Pokemon(1,""+posicion,""+posicion,"",0,"",0,"",0,0,0,0,0,0,"",""));
-                    }
+                        
+                        
+                    }*/
                     String botar = contenido.next();
+                    ArrayList espacios = new ArrayList();
+                    for (int i = 0; i < Disponibles.tamano(); i++) {
+                        espacios.add(Disponibles.Priority().toString());
+                    }
+                    espacios.remove(0);
                 }
                 Scanner comprobacion = new Scanner(temporal);
                 comprobacion.useDelimiter("•");
@@ -300,7 +330,10 @@ public class TDA_Archivo {
                 String nombre = revision.next();
                 String apodo = revision.next();
                 if (nombre.equals(condenado.getNombre()) && apodo.equals(condenado.getApodo())) {
-                    nuevo_contenido = nuevo_contenido + "☼" + "1•" + condenado.getNombre() + "•"
+
+                    nuevo_contenido = nuevo_contenido + "☼";
+                    int ubicacion = nuevo_contenido.length();
+                    String borrado = "1•" + condenado.getNombre() + "•"
                             + condenado.getApodo() + "•"
                             + condenado.getDescripcion() + "•"
                             + condenado.getAltura() + "•"
@@ -308,9 +341,9 @@ public class TDA_Archivo {
                             + condenado.getPeso() + "•"
                             + condenado.getGenero() + "•";
                     for (int j = 0; j < condenado.getHabilidades().size(); j++) {
-                        nuevo_contenido = nuevo_contenido + condenado.getHabilidades().get(j) + "○";
+                        borrado = borrado + condenado.getHabilidades().get(j) + "○";
                     }
-                    nuevo_contenido = nuevo_contenido + "•"
+                    borrado = borrado + "•"
                             + condenado.getHp() + "•"
                             + condenado.getAtaque() + "•"
                             + condenado.getDefensa() + "•"
@@ -320,11 +353,12 @@ public class TDA_Archivo {
                             + condenado.getEvolucion() + "•"
                             + condenado.getImagen() + "•";
                     for (int i = 0; i < condenado.getDebilidades().size(); i++) {
-                        nuevo_contenido = nuevo_contenido + condenado.getDebilidades().get(i) + "○";
+                        borrado = borrado + condenado.getDebilidades().get(i) + "○";
                     }
-                    nuevo_contenido = nuevo_contenido + "•"
+                    borrado = borrado + "•"
                             + condenado.getTipo()[0] + "•"
                             + condenado.getTipo()[1];
+
                 } else {
                     nuevo_contenido = nuevo_contenido + "☼" + temporal;
                 }
@@ -530,56 +564,57 @@ public class TDA_Archivo {
         return lista_disponibles;
     }
 
+    /*
     public void cola() {
         try {
             Scanner contenido = new Scanner(this.Borrados_file);
-        contenido.useDelimiter("☼");
-        while (contenido.hasNext()) {
-            Scanner registros = new Scanner(contenido.next());
-            registros.useDelimiter("•");
-            String disponible = registros.next();
-            String Nombre = registros.next();
-            String Apodo = registros.next();
-            String Descripcion = registros.next();
-            double Altura = Double.parseDouble(registros.next());
-            String Categoria = registros.next();
-            double Peso = Double.parseDouble(registros.next());
-            String genero = registros.next();
-            Scanner hability = new Scanner(registros.next());
-            ArrayList<String> Habilidades = new ArrayList<String>();
-            hability.useDelimiter("○");
-            while (hability.hasNext()) {
-                Habilidades.add(hability.next());
+            contenido.useDelimiter("☼");
+            while (contenido.hasNext()) {
+                Scanner registros = new Scanner(contenido.next());
+                registros.useDelimiter("•");
+                String disponible = registros.next();
+                String Nombre = registros.next();
+                String Apodo = registros.next();
+                String Descripcion = registros.next();
+                double Altura = Double.parseDouble(registros.next());
+                String Categoria = registros.next();
+                double Peso = Double.parseDouble(registros.next());
+                String genero = registros.next();
+                Scanner hability = new Scanner(registros.next());
+                ArrayList<String> Habilidades = new ArrayList<String>();
+                hability.useDelimiter("○");
+                while (hability.hasNext()) {
+                    Habilidades.add(hability.next());
+                }
+                int Hp = Integer.parseInt(registros.next());
+                int Ataque = Integer.parseInt(registros.next());
+                int Defensa = Integer.parseInt(registros.next());
+                int Ataque_Especial = Integer.parseInt(registros.next());
+                int Defensa_Especial = Integer.parseInt(registros.next());
+                int Velocidad = Integer.parseInt(registros.next());
+                String Evolucion = registros.next();
+                String Imagen = registros.next();
+                Scanner debil = new Scanner(registros.next());
+                ArrayList<String> Debilidades = new ArrayList<String>();
+                debil.useDelimiter("○");
+                while (hability.hasNext()) {
+                    Debilidades.add(debil.next());
+                }
+                String tipo[] = new String[2];
+                tipo[0] = registros.next();
+                tipo[1] = registros.next();
+                Pokemon pokemon = new Pokemon(1, Nombre, Apodo, Descripcion, Altura, Categoria, Peso, genero, Hp, Ataque, Defensa, Ataque_Especial, Defensa_Especial, Velocidad, Evolucion, Imagen);
+                pokemon.setHabilidades(Habilidades);
+                pokemon.setDebilidades(Debilidades);
+                pokemon.setTipo(tipo);
+                Disponibles.add(pokemon);
             }
-            int Hp = Integer.parseInt(registros.next());
-            int Ataque = Integer.parseInt(registros.next());
-            int Defensa = Integer.parseInt(registros.next());
-            int Ataque_Especial = Integer.parseInt(registros.next());
-            int Defensa_Especial = Integer.parseInt(registros.next());
-            int Velocidad = Integer.parseInt(registros.next());
-            String Evolucion = registros.next();
-            String Imagen = registros.next();
-            Scanner debil = new Scanner(registros.next());
-            ArrayList<String> Debilidades = new ArrayList<String>();
-            debil.useDelimiter("○");
-            while (hability.hasNext()) {
-                Debilidades.add(debil.next());
-            }
-            String tipo[] = new String[2];
-            tipo[0] = registros.next();
-            tipo[1] = registros.next();
-            Pokemon pokemon = new Pokemon(1, Nombre, Apodo, Descripcion, Altura, Categoria, Peso, genero, Hp, Ataque, Defensa, Ataque_Especial, Defensa_Especial, Velocidad, Evolucion, Imagen);
-            pokemon.setHabilidades(Habilidades);
-            pokemon.setDebilidades(Debilidades);
-            pokemon.setTipo(tipo);
-            Disponibles.add(pokemon);
-        }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-    }
 
+    }
+     */
     public void cola(Pokemon borrado) throws FileNotFoundException {
 
     }

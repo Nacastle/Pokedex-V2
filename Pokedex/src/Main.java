@@ -809,22 +809,23 @@ public class Main extends javax.swing.JFrame {
         FileWriter flwriter = null;
         BufferedWriter bfwriter = null;
         try {
-            if (file.exists()) {
-                JOptionPane.showMessageDialog(null, "El usuario Ya existe!");
-            } else {
+            //if (file.exists()) {
+                //JOptionPane.showMessageDialog(null, "El usuario Ya existe!");
+            //} else {
                 flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
 
                 bfwriter = new BufferedWriter(flwriter);
                 String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
                 //bfwriter.append(tfr_usuario.getText());
                 bfwriter.write(temporal);
+                
                 bfwriter.close();
                 tfr_nombre.setText("");
                 tfr_usuario.setText("");
                 tfr_contraseña.setText("");
                 jsr_edad.setValue(10);
                 JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
-            }
+            //}
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
         } finally {

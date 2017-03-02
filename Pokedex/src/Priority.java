@@ -23,6 +23,22 @@ public class Priority {
             this.prioriedad = prioriedad;
         }
 
+        public Object getNodo() {
+            return nodo;
+        }
+
+        public void setNodo(Object nodo) {
+            this.nodo = nodo;
+        }
+
+        public int getPrioriedad() {
+            return prioriedad;
+        }
+
+        public void setPrioriedad(int prioriedad) {
+            this.prioriedad = prioriedad;
+        }
+        
         @Override
         public String toString() {
             return nodo + "," + prioriedad;
@@ -103,4 +119,29 @@ public class Priority {
         return heap[1].prioriedad;
     }
 
+    public int getHeaptamaño() {
+        return heaptamaño;
+    }
+
+    public void setHeaptamaño(int heaptamaño) {
+        this.heaptamaño = heaptamaño;
+    }
+
+    public node[] getHeap() {
+        return heap;
+    }
+
+    public void setHeap(node[] heap) {
+        this.heap = heap;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+    
+    
 }
