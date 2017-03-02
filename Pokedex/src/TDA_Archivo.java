@@ -20,7 +20,6 @@ public class TDA_Archivo {
 
     File Archivo;
     File Borrados_file;
-    Priority Disponibles;
 
     public TDA_Archivo() {
     }
@@ -28,7 +27,6 @@ public class TDA_Archivo {
     public TDA_Archivo(File Archivo, File Borrados_file) {
         this.Archivo = Archivo;
         this.Borrados_file = Borrados_file;
-        Disponibles = new Priority();
         //this.cola();
     }
 
@@ -46,25 +44,15 @@ public class TDA_Archivo {
             }
             direccion = direccion + "☼" + temporal;
         }*/
- /*int mayor = 0;
+        Scanner disponible = new Scanner(Borrados_file);
+        disponible.useDelimiter("☼");
+        int mayor = 0;
         int posicion = 0;
-        
-        if (!Disponibles.ColaVacia()) {
-            mayor=Disponibles.Priority().getPrioriedad();
-            posicion=(int)Disponibles.Priority().getNodo();
-        }*/
-
-        if (!Disponibles.ColaVacia()) {
-            ArrayList espacios = new ArrayList();
-            for (int i = 0; i < Disponibles.tamano(); i++) {
-                espacios.add(Disponibles.Priority().getNodo().toString());
-            }
-            
-            
-            
-            espacios.remove(0);
-        }else{
-            
+        if (disponible.hasNext()) {
+            Scanner caracteristica = new Scanner(disponible.next());
+            caracteristica.useDelimiter(",");
+            mayor = Integer.parseInt( caracteristica.next());
+            posicion = Integer.parseInt( caracteristica.next());
         }
 
         /*
@@ -150,11 +138,6 @@ public class TDA_Archivo {
                         
                     }*/
                     String botar = contenido.next();
-                    ArrayList espacios = new ArrayList();
-                    for (int i = 0; i < Disponibles.tamano(); i++) {
-                        espacios.add(Disponibles.Priority().toString());
-                    }
-                    espacios.remove(0);
                 }
                 Scanner comprobacion = new Scanner(temporal);
                 comprobacion.useDelimiter("•");
@@ -373,6 +356,7 @@ public class TDA_Archivo {
             filewriter = new FileWriter(Archivo, false);
             bufferedwriter = new BufferedWriter(filewriter);
             bufferedwriter.write(nuevo_contenido);
+            bufferedwriter.flush();
         } catch (Exception e) {
 
         }

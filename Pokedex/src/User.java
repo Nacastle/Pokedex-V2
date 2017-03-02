@@ -30,8 +30,10 @@ public class User {
         File x = new File("./"+user+"/"+user+"_poke.txt");
         File y = new File("./"+user+"/"+user+"_pokeb.txt");
         try {
-            x.createNewFile();
-            y.createNewFile();
+            if (!x.exists()&&!y.exists()) {
+                x.createNewFile();
+                y.createNewFile();
+            }          
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Algo Exploto");
         }
