@@ -178,6 +178,9 @@ public class Main extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         back_Eliminar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        cb_mios = new javax.swing.JComboBox<>();
+        cb_usuarios = new javax.swing.JComboBox<>();
+        jButton13 = new javax.swing.JButton();
         back_listar = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -610,6 +613,24 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("Eliminar", jPanel3);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cb_mios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb_miosMouseClicked(evt);
+            }
+        });
+        jPanel4.add(cb_mios, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, -1));
+
+        cb_usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb_usuariosMouseClicked(evt);
+            }
+        });
+        jPanel4.add(cb_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 60, 250, -1));
+
+        jButton13.setText("jButton13");
+        jPanel4.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, -1, -1));
         jPanel4.add(back_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Transferir", jPanel4);
@@ -931,7 +952,7 @@ public class Main extends javax.swing.JFrame {
 
             DefaultComboBoxModel x = new DefaultComboBoxModel();
             for (int i = 0; i < poke.size(); i++) {
-                x.addElement(poke.get(i).getNombre());
+                x.addElement(poke.get(i));
             }
             cb_pokedex.setModel(x);
 
@@ -1041,7 +1062,7 @@ public class Main extends javax.swing.JFrame {
 
             DefaultComboBoxModel x = new DefaultComboBoxModel();
             for (int i = 0; i < poke1.size(); i++) {
-                x.addElement(poke1.get(i).getNombre());
+                x.addElement(poke1.get(i));
             }
             jComboBox1.setModel(x);
 
@@ -1084,6 +1105,36 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton9MouseClicked
+
+    private void cb_miosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_miosMouseClicked
+        try {
+            ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
+
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            for (int i = 0; i < poke.size(); i++) {
+                x.addElement(poke.get(i));
+            }
+            cb_mios.setModel(x);
+
+        } catch (FileNotFoundException ex) {
+
+        }
+    }//GEN-LAST:event_cb_miosMouseClicked
+
+    private void cb_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_usuariosMouseClicked
+    try {
+            ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
+
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            for (int i = 0; i < poke.size(); i++) {
+                x.addElement(poke.get(i));
+            }
+            cb_mios.setModel(x);
+
+        } catch (FileNotFoundException ex) {
+
+        }
+    }//GEN-LAST:event_cb_usuariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1131,8 +1182,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bg_Genero;
     private javax.swing.ButtonGroup bgm_Genero;
     private javax.swing.JComboBox<String> cb_debilidades;
+    private javax.swing.JComboBox<String> cb_mios;
     private javax.swing.JComboBox<String> cb_pokedex;
     private javax.swing.JComboBox<String> cb_tipo;
+    private javax.swing.JComboBox<String> cb_usuarios;
     private javax.swing.JComboBox<String> cbm_Debilidades;
     private javax.swing.JComboBox<String> cbm_Tipo;
     private javax.swing.JLabel imgPokemon;
@@ -1140,6 +1193,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
