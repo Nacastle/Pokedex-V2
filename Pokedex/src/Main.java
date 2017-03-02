@@ -1008,12 +1008,12 @@ public class Main extends javax.swing.JFrame {
         ArrayList<String> tempo_debil = debilidades;
         tempo_tipo = tipo;
 
-        pokemon = new Pokemon(0, nombre, apodo, descripcion, (double) js_altura.getValue(), categoria, (double) js_peso.getValue(), genero, (int) js_hp.getValue(), (int) js_ataque.getValue(), (int) js_defensa.getValue(), (int) js_ataqueEspecial.getValue(), (int) js_defensaEspecial.getValue(), (int) js_velocidad.getValue(), evolucion, direccionm);
+        pokemon = new Pokemon(0, nombre, apodo, descripcion, (double) jsm_Altura.getValue(), categoria, (double) jsm_Peso.getValue(), genero, (int) jsm_hp.getValue(), (int) jsm_ataque.getValue(), (int) jsm_defensa.getValue(), (int) jsm_ataqueEspecial.getValue(), (int) jsm_defensaEspecial.getValue(), (int) jsm_velocidad.getValue(), evolucion, direccionm);
         pokemon.setHabilidades(hab);
         pokemon.setTipo(tempo_tipo);
         pokemon.setDebilidades(tempo_debil);
 
-        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tf_habilidad1.getText() + tf_habilidad2.getText() + tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
+        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tfm_habilidad1.getText() + tfm_habilidad2.getText() + tfm_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
 
         String us = usuario.getUser();
 
