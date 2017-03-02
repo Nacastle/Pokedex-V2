@@ -167,9 +167,10 @@ public class Main extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel47 = new javax.swing.JLabel();
+        jlm_img = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         back_modificar = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jb_Eliminar = new javax.swing.JComboBox<>();
@@ -493,9 +494,19 @@ public class Main extends javax.swing.JFrame {
         jPanel2.add(cbm_Debilidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 405, -1, -1));
 
         jButton7.setText("Añadir");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 369, -1, -1));
 
         jButton8.setText("Añadir");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 404, -1, -1));
 
         jLabel40.setText("HP");
@@ -546,13 +557,30 @@ public class Main extends javax.swing.JFrame {
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 44, -1, 236));
-        jPanel2.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(643, 44, 253, 178));
+        jPanel2.add(jlm_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(643, 44, 253, 178));
 
         jButton9.setText("Cargar Imagen");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 240, -1, -1));
 
         jButton11.setText("Guardar cambios");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
+
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
         jPanel2.add(back_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Modificar", jPanel2);
@@ -755,7 +783,7 @@ public class Main extends javax.swing.JFrame {
         double altura = (double) js_altura.getValue();
         //String alt = (String) js_altura.getValue();
         String categoria = tf_categoria.getText();
-        double peso = (double) js_altura.getValue();
+        double peso = (double) js_peso.getValue();
         String genero;
         if (rd_hombre.isSelected()) {
             genero = rd_hombre.getText();
@@ -805,14 +833,15 @@ public class Main extends javax.swing.JFrame {
             tf_descripcion.setText("");
             js_altura.setValue(1);
             tf_categoria.setText("");
-            js_altura.setValue(1);
+            js_peso.setValue(1);
             rd_hombre.setSelected(true);
             tf_habilidad1.setText("");
-            tf_habilidad1.setText("");
-            tf_habilidad1.setText("");
+            tf_habilidad2.setText("");
+            tf_habilidad3.setText("");
             hab = new ArrayList();
             tempo_debil = debilidades = new ArrayList();
             tempo_tipo = new String[2];
+            cont = 0;
 
             js_hp.setValue(1);
             js_ataque.setValue(1);
@@ -822,6 +851,8 @@ public class Main extends javax.swing.JFrame {
             js_velocidad.setValue(1);
             tf_evolucion.setText("");
             imgPokemon.setIcon(null);
+            
+            
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -868,10 +899,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void pokemon_listadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pokemon_listadoMouseClicked
-        jTextArea1.setText(((Pokemon)cb_pokedex.getSelectedItem()).toString());
-        File as = new File(((Pokemon)cb_pokedex.getSelectedItem()).getImagen());
+        jTextArea1.setText(((Pokemon) cb_pokedex.getSelectedItem()).toString());
+        File as = new File(((Pokemon) cb_pokedex.getSelectedItem()).getImagen());
         Image img = Toolkit.getDefaultToolkit().createImage(as.getPath()).getScaledInstance(240, 190, 0);
-        lista_poke.setIcon(new ImageIcon (img));
+        lista_poke.setIcon(new ImageIcon(img));
     }//GEN-LAST:event_pokemon_listadoMouseClicked
 
     private void cb_pokedexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_pokedexItemStateChanged
@@ -881,13 +912,13 @@ public class Main extends javax.swing.JFrame {
     private void jb_EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_EliminarMouseClicked
         try {
             ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
-            
+
             DefaultComboBoxModel x = new DefaultComboBoxModel();
             for (int i = 0; i < poke.size(); i++) {
                 x.addElement(poke.get(i));
             }
             jb_Eliminar.setModel(x);
-            
+
         } catch (FileNotFoundException ex) {
 
         }
@@ -897,13 +928,13 @@ public class Main extends javax.swing.JFrame {
     private void cb_pokedexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_pokedexMouseClicked
         try {
             ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
-            
+
             DefaultComboBoxModel x = new DefaultComboBoxModel();
             for (int i = 0; i < poke.size(); i++) {
                 x.addElement(poke.get(i).getNombre());
             }
             cb_pokedex.setModel(x);
-            
+
         } catch (FileNotFoundException ex) {
 
         }
@@ -911,14 +942,148 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         try {
-            usuario.getPokedex().Borrar((Pokemon)jb_Eliminar.getSelectedItem());
+            usuario.getPokedex().Borrar((Pokemon) jb_Eliminar.getSelectedItem());
             JOptionPane.showMessageDialog(null, "Se ha liberado a su pokemon :(");
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Algo paso al Eliminar pokemon");
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        String nombre = tfm_Nombre.getText();
+        String apodo = tfm_Apodo.getText();
+        String descripcion = tam_Descripcion.getText();
+        double altura = (double) jsm_Altura.getValue();
+        //String alt = (String) js_altura.getValue();
+        String categoria = tfm_Categoria.getText();
+        double peso = (double) jsm_Peso.getValue();
+        String genero;
+        if (rd_hombre.isSelected()) {
+            genero = rdm_Hombre.getText();
+        } else if (rd_mujer.isSelected()) {
+            genero = rdm_Mujer.getText();
+        } else {
+            genero = rdm_Shyny.getText();
+        }
+        ArrayList<String> hab = new ArrayList();
+        hab.add(tfm_habilidad1.getText());
+        hab.add(tfm_habilidad2.getText());
+        hab.add(tfm_habilidad3.getText());
+
+        int vida = (int) jsm_hp.getValue();
+        int ataque = (int) jsm_ataque.getValue();
+        int defensa = (int) jsm_defensa.getValue();
+        int ataqueEspecial = (int) jsm_ataqueEspecial.getValue();
+        int defensaEspecial = (int) jsm_defensaEspecial.getValue();
+        int velocidad = (int) jsm_velocidad.getValue();
+        String evolucion = tf_evoluciones.getText();
+
+        if (tipo[1].equals("")) {
+            tipo[1] = " ";
+        }
+        String[] tempo_tipo = new String[2];
+        ArrayList<String> tempo_debil = debilidades;
+        tempo_tipo = tipo;
+
+        pokemon = new Pokemon(0, nombre, apodo, descripcion, (double) js_altura.getValue(), categoria, (double) js_peso.getValue(), genero, (int) js_hp.getValue(), (int) js_ataque.getValue(), (int) js_defensa.getValue(), (int) js_ataqueEspecial.getValue(), (int) js_defensaEspecial.getValue(), (int) js_velocidad.getValue(), evolucion, direccionm);
+        pokemon.setHabilidades(hab);
+        pokemon.setTipo(tempo_tipo);
+        pokemon.setDebilidades(tempo_debil);
+
+        total = nombre + tf_apodo.getText() + apodo + descripcion + altura + categoria + peso + genero + tf_habilidad1.getText() + tf_habilidad2.getText() + tf_habilidad3.getText() + vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad + evolucion + tipo[0] + tipo[1] + debilidades;
+
+        String us = usuario.getUser();
+
+        JOptionPane.showMessageDialog(null, "Usuario conectado: " + us);
+        
+        
+        try {
+            usuario.getPokedex().Modificar((Pokemon)jComboBox1.getSelectedItem(), pokemon);
+            //usuario.getPokedex().Agregar(pokemon, total.length());
+            JOptionPane.showMessageDialog(null, "Se guardo exitosamente el puchamon");
+
+            tfm_Nombre.setText("");
+            tfm_Apodo.setText("");
+            tf_descripcion.setText("");
+            jsm_Altura.setValue(1);
+            tfm_Categoria.setText("");
+            jsm_Peso.setValue(1);
+            rdm_Hombre.setSelected(true);
+            tfm_habilidad1.setText("");
+            tfm_habilidad2.setText("");
+            tfm_habilidad3.setText("");
+            hab = new ArrayList();
+            tempo_debil = debilidades = new ArrayList();
+            tempo_tipo = new String[2];
+            cont = 0;
+
+            jsm_hp.setValue(1);
+            jsm_ataque.setValue(1);
+            jsm_defensa.setValue(1);
+            jsm_ataqueEspecial.setValue(1);
+            jsm_defensaEspecial.setValue(1);
+            jsm_velocidad.setValue(1);
+            tf_evoluciones.setText("");
+            imgPokemon.setIcon(null);
+            
+            
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        try {
+            ArrayList<Pokemon> poke1 = usuario.getPokedex().Listar();
+
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            for (int i = 0; i < poke1.size(); i++) {
+                x.addElement(poke1.get(i).getNombre());
+            }
+            jComboBox1.setModel(x);
+
+        } catch (FileNotFoundException ex) {
+
+        }
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        if (cont == 2) {
+            JOptionPane.showMessageDialog(null, "Ha alcanzado el limite de habilidades");
+        } else if (cont == 0) {
+            String tipos = cb_tipo.getSelectedItem().toString();
+            tipo[0] = tipos;
+            cont++;
+        } else if (cont == 1) {
+            String tipos = cb_tipo.getSelectedItem().toString();
+            tipo[1] = tipos;
+            cont++;
+        }    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        debilidades.add(cb_debilidades.getSelectedItem().toString());
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+    JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        fileChooser.setFileFilter(filtro);
+
+        int regresaValor = fileChooser.showOpenDialog(null);
+        if (regresaValor == JFileChooser.APPROVE_OPTION) {
+            File archivoElegido = fileChooser.getSelectedFile();
+            direccionm = archivoElegido.getPath();
+            try {
+                ImageIcon icon = new ImageIcon(direccionm);
+                jlm_img.setIcon(icon);
+            } catch (Exception es) {
+                JOptionPane.showMessageDialog(null, "Exploto algo al cargar la imagen" + es);
+            }
+        }
+    }//GEN-LAST:event_jButton9MouseClicked
 
     /**
      * @param args the command line arguments
@@ -983,6 +1148,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1024,7 +1190,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1053,6 +1218,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jb_Eliminar;
     private javax.swing.JDialog jd_Interface;
     private javax.swing.JDialog jd_register;
+    private javax.swing.JLabel jlm_img;
     private javax.swing.JSpinner js_altura;
     private javax.swing.JSpinner js_ataque;
     private javax.swing.JSpinner js_ataqueEspecial;
@@ -1107,6 +1273,7 @@ public class Main extends javax.swing.JFrame {
     ArrayList<String> debilidades = new ArrayList();
     int cont = 0;
     String direccion;
+    String direccionm;
     String total;
     User usuario;
 
