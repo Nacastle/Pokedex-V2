@@ -21,7 +21,7 @@ public class User {
     private String Name;
     private String user;
     private String password;
-    TDA_Archivo pokedex;
+    private TDA_Archivo pokedex;
 
     public User() {
     }

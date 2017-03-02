@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -66,7 +67,6 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         back_transferir = new javax.swing.JLabel();
-        back_listar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -174,6 +174,7 @@ public class Main extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         back_Eliminar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        back_listar = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -246,7 +247,6 @@ public class Main extends javax.swing.JFrame {
         jPanel5.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Pokedex", jPanel5);
-        jTabbedPane1.addTab("tab6", back_listar);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -548,8 +548,12 @@ public class Main extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jb_Eliminar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jb_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 80, -1, -1));
+        jb_Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_EliminarMouseClicked(evt);
+            }
+        });
+        jPanel3.add(jb_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 80, 210, -1));
 
         jButton10.setText("Eliminar");
         jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 79, -1, -1));
@@ -558,6 +562,8 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("Eliminar", jPanel3);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.add(back_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
+
         jTabbedPane1.addTab("Transferir", jPanel4);
 
         jMenu1.setText("File");
@@ -681,23 +687,46 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
-        fileChooser.setFileFilter(filtro);
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        File file = new File("./" + tfr_usuario.getText());
+        file.mkdir();
 
-        int regresaValor = fileChooser.showOpenDialog(null);
-        if (regresaValor == JFileChooser.APPROVE_OPTION) {
-            File archivoElegido = fileChooser.getSelectedFile();
-            direccion = archivoElegido.getPath();
-            try {
-                ImageIcon icon = new ImageIcon(direccion);
-                imgPokemon.setIcon(icon);
-            } catch (Exception es) {
-                JOptionPane.showMessageDialog(null, "Exploto algo al cargar la imagen" + es);
+        FileWriter flwriter = null;
+        BufferedWriter bfwriter = null;
+        try {
+            //if (file.exists()) {
+            //JOptionPane.showMessageDialog(null, "El usuario Ya existe!");
+            //} else {
+            flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
+
+            bfwriter = new BufferedWriter(flwriter);
+            String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
+            //bfwriter.append(tfr_usuario.getText());
+            bfwriter.write(temporal);
+
+            bfwriter.close();
+            tfr_nombre.setText("");
+            tfr_usuario.setText("");
+            tfr_contraseña.setText("");
+            jsr_edad.setValue(10);
+            JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
+            //}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
+        } finally {
+            if (flwriter != null) {
+                try {
+                    bfwriter.close();
+                    flwriter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-    }//GEN-LAST:event_jButton6MouseClicked
+
+        //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
+
+    }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
         String nombre = tf_nombre.getText();
@@ -747,7 +776,7 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Usuario conectado: " + us);
 
         try {
-            usuario.pokedex.Agregar(pokemon, total.length());
+            usuario.getPokedex().Agregar(pokemon, total.length());
             //usuario.getPokedex().Agregar(pokemon, total.length());
             JOptionPane.showMessageDialog(null, "Se guardo exitosamente el puchamon");
 
@@ -778,8 +807,30 @@ public class Main extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-
     }//GEN-LAST:event_jButton12MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        fileChooser.setFileFilter(filtro);
+
+        int regresaValor = fileChooser.showOpenDialog(null);
+        if (regresaValor == JFileChooser.APPROVE_OPTION) {
+            File archivoElegido = fileChooser.getSelectedFile();
+            direccion = archivoElegido.getPath();
+            try {
+                ImageIcon icon = new ImageIcon(direccion);
+                imgPokemon.setIcon(icon);
+            } catch (Exception es) {
+                JOptionPane.showMessageDialog(null, "Exploto algo al cargar la imagen" + es);
+            }
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+
+        debilidades.add(cb_debilidades.getSelectedItem().toString());
+    }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (cont == 2) {
@@ -794,62 +845,31 @@ public class Main extends javax.swing.JFrame {
             cont++;
         }
 
-
     }//GEN-LAST:event_jButton4MouseClicked
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-
-        debilidades.add(cb_debilidades.getSelectedItem().toString());
-    }//GEN-LAST:event_jButton5MouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        File file = new File("./" + tfr_usuario.getText());
-        file.mkdir();
-
-        FileWriter flwriter = null;
-        BufferedWriter bfwriter = null;
-        try {
-            //if (file.exists()) {
-                //JOptionPane.showMessageDialog(null, "El usuario Ya existe!");
-            //} else {
-                flwriter = new FileWriter("./" + tfr_usuario.getText() + "/" + tfr_usuario.getText() + ".txt");
-
-                bfwriter = new BufferedWriter(flwriter);
-                String temporal = tfr_usuario.getText() + "•" + tfr_contraseña.getText() + "•" + jsr_edad.getValue() + "•" + tfr_nombre.getText();
-                //bfwriter.append(tfr_usuario.getText());
-                bfwriter.write(temporal);
-                
-                bfwriter.close();
-                tfr_nombre.setText("");
-                tfr_usuario.setText("");
-                tfr_contraseña.setText("");
-                jsr_edad.setValue(10);
-                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente");
-            //}
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Algo exploto al crear el archivo");
-        } finally {
-            if (flwriter != null) {
-                try {
-                    bfwriter.close();
-                    flwriter.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        //File archivo = new File("./"+tfr_usuario.getText()+"/"+tfr_usuario.getText()+".txt");
-
-    }//GEN-LAST:event_jButton3MouseClicked
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        cb_pokedex.getSelectedItem();
+    }//GEN-LAST:event_jButton13MouseClicked
 
     private void cb_pokedexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_pokedexItemStateChanged
         cb_pokedex.getSelectedItem();
     }//GEN-LAST:event_cb_pokedexItemStateChanged
 
-    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
-        cb_pokedex.getSelectedItem();
-    }//GEN-LAST:event_jButton13MouseClicked
+    private void jb_EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_EliminarMouseClicked
+        try {
+            ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
+            
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            for (int i = 0; i < poke.size(); i++) {
+                x.addElement(poke.get(i));
+            }
+            jb_Eliminar.setModel(x);
+            
+        } catch (FileNotFoundException ex) {
+
+        }
+
+    }//GEN-LAST:event_jb_EliminarMouseClicked
 
     /**
      * @param args the command line arguments
