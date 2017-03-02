@@ -968,7 +968,22 @@ public class Main extends javax.swing.JFrame {
                 ArrayList<String> nodos = new ArrayList();
                 
                 Scanner sc = new Scanner(brr);
-                sc.useDelimiter('');
+                sc.useDelimiter("☼");
+                while(sc.hasNext()){
+                    nodos.add(sc.next());
+                }
+                Pokemon x=((Pokemon) jb_Eliminar.getSelectedItem());
+                int posicion=usuario.getPokedex().Buscar(x);
+                int y=0;
+                String altura=""+x.getAltura();
+                String peso=""+x.getPeso();
+                String vida=""+x.getHp();
+                String ataque=""+x.getAtaque();
+                String Defensa=""+x.getDefensa();
+                String A_esp=""+x.getAtaque_Especial();
+                String d_esp=""+x.getDefensa_Especial();
+                String vel=""+x.getVelocidad();
+                y=y+x.getNombre().length()+x.getApodo().length()+x.getDescripcion().length()+altura.length()+x.getCategoria().length()+peso.length()+x.getGenero().length()+vida.length()+ataque.length()+Defensa.length()+A_esp.length()+d_esp.length()+vel.length()+x.getEvolucion().length()+x.getImagen().length();
             }else{
                 
             }
