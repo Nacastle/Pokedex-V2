@@ -332,6 +332,7 @@ public class TDA_Archivo {
                     borrado = borrado + "•"
                             + condenado.getTipo()[0] + "•"
                             + condenado.getTipo()[1];
+                    nuevo_contenido=nuevo_contenido+borrado;
 
                 } else {
                     nuevo_contenido = nuevo_contenido + "☼" + temporal;

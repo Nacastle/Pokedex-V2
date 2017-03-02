@@ -174,6 +174,7 @@ public class Main extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jb_Eliminar = new javax.swing.JComboBox<>();
         jButton10 = new javax.swing.JButton();
+        jLabel48 = new javax.swing.JLabel();
         back_Eliminar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         back_listar = new javax.swing.JLabel();
@@ -224,6 +225,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Seleccione al Pokemon");
         jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
@@ -562,10 +564,19 @@ public class Main extends javax.swing.JFrame {
                 jb_EliminarMouseClicked(evt);
             }
         });
-        jPanel3.add(jb_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 80, 210, -1));
+        jPanel3.add(jb_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 210, -1));
 
         jButton10.setText("Eliminar");
-        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 79, -1, -1));
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
+
+        jLabel48.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel48.setText("Seleccione el pokemon a Eliminar");
+        jPanel3.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 240, -1));
         jPanel3.add(back_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Eliminar", jPanel3);
@@ -889,7 +900,7 @@ public class Main extends javax.swing.JFrame {
             
             DefaultComboBoxModel x = new DefaultComboBoxModel();
             for (int i = 0; i < poke.size(); i++) {
-                x.addElement(poke.get(i));
+                x.addElement(poke.get(i).getNombre());
             }
             cb_pokedex.setModel(x);
             
@@ -897,6 +908,17 @@ public class Main extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_cb_pokedexMouseClicked
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        try {
+            usuario.getPokedex().Borrar((Pokemon)jb_Eliminar.getSelectedItem());
+            JOptionPane.showMessageDialog(null, "Se ha liberado a su pokemon :(");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Algo paso al Eliminar pokemon");
+        }
+        
+        
+    }//GEN-LAST:event_jButton10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1003,6 +1025,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
