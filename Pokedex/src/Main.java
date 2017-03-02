@@ -252,8 +252,8 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextArea1);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 480, 380));
-        jPanel5.add(lista_poke, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 150, 120));
-        jPanel5.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
+        jPanel5.add(lista_poke, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 350, 250));
+        jPanel5.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 900, 460));
 
         jTabbedPane1.addTab("Pokedex", jPanel5);
 

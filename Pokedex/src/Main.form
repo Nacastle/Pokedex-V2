@@ -218,14 +218,14 @@
                 <Component class="javax.swing.JLabel" name="lista_poke">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="240" y="190" width="150" height="120"/>
+                      <AbsoluteConstraints x="50" y="160" width="350" height="250"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JLabel" name="back_transferir">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="0" width="900" height="460"/>
+                      <AbsoluteConstraints x="-10" y="0" width="900" height="460"/>
                     </Constraint>
                   </Constraints>
                 </Component>
