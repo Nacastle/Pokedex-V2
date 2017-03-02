@@ -199,7 +199,7 @@ class Pokemon {
         this.Evolucion = Evolucion;
     }
 
-    public Object getImagen() {
+    public String getImagen() {
         return Imagen;
     }
 

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -63,9 +64,10 @@ public class Main extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         cb_pokedex = new javax.swing.JComboBox<>();
-        jButton13 = new javax.swing.JButton();
+        pokemon_listado = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        lista_poke = new javax.swing.JLabel();
         back_transferir = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -230,20 +232,27 @@ public class Main extends javax.swing.JFrame {
                 cb_pokedexItemStateChanged(evt);
             }
         });
-        jPanel5.add(cb_pokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 270, -1));
-
-        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+        cb_pokedex.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton13MouseClicked(evt);
+                cb_pokedexMouseClicked(evt);
             }
         });
-        jPanel5.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 160, 80));
+        jPanel5.add(cb_pokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 270, -1));
+
+        pokemon_listado.setText("Seleccionar Pokemon");
+        pokemon_listado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pokemon_listadoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(pokemon_listado, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 160, 80));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 480, 380));
+        jPanel5.add(lista_poke, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 150, 120));
         jPanel5.add(back_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 460));
 
         jTabbedPane1.addTab("Pokedex", jPanel5);
@@ -847,9 +856,12 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4MouseClicked
 
-    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
-        cb_pokedex.getSelectedItem();
-    }//GEN-LAST:event_jButton13MouseClicked
+    private void pokemon_listadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pokemon_listadoMouseClicked
+        jTextArea1.setText(((Pokemon)cb_pokedex.getSelectedItem()).toString());
+        File as = new File(((Pokemon)cb_pokedex.getSelectedItem()).getImagen());
+        Image img = Toolkit.getDefaultToolkit().createImage(as.getPath()).getScaledInstance(240, 190, 0);
+        lista_poke.setIcon(new ImageIcon (img));
+    }//GEN-LAST:event_pokemon_listadoMouseClicked
 
     private void cb_pokedexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_pokedexItemStateChanged
         cb_pokedex.getSelectedItem();
@@ -870,6 +882,21 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jb_EliminarMouseClicked
+
+    private void cb_pokedexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_pokedexMouseClicked
+        try {
+            ArrayList<Pokemon> poke = usuario.getPokedex().Listar();
+            
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            for (int i = 0; i < poke.size(); i++) {
+                x.addElement(poke.get(i));
+            }
+            cb_pokedex.setModel(x);
+            
+        } catch (FileNotFoundException ex) {
+
+        }
+    }//GEN-LAST:event_cb_pokedexMouseClicked
 
     /**
      * @param args the command line arguments
@@ -926,7 +953,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1021,7 +1047,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner jsm_hp;
     private javax.swing.JSpinner jsm_velocidad;
     private javax.swing.JSpinner jsr_edad;
+    private javax.swing.JLabel lista_poke;
     private javax.swing.JPasswordField pf_password;
+    private javax.swing.JButton pokemon_listado;
     private javax.swing.JRadioButton rd_Shyny;
     private javax.swing.JRadioButton rd_hombre;
     private javax.swing.JRadioButton rd_mujer;
