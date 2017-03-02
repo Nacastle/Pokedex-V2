@@ -974,7 +974,7 @@ public class Main extends javax.swing.JFrame {
                 }
                 Pokemon x=((Pokemon) jb_Eliminar.getSelectedItem());
                 int posicion=usuario.getPokedex().Buscar(x);
-                int y=0;
+                String y="";
                 String altura=""+x.getAltura();
                 String peso=""+x.getPeso();
                 String vida=""+x.getHp();
@@ -983,7 +983,29 @@ public class Main extends javax.swing.JFrame {
                 String A_esp=""+x.getAtaque_Especial();
                 String d_esp=""+x.getDefensa_Especial();
                 String vel=""+x.getVelocidad();
-                y=y+x.getNombre().length()+x.getApodo().length()+x.getDescripcion().length()+altura.length()+x.getCategoria().length()+peso.length()+x.getGenero().length()+vida.length()+ataque.length()+Defensa.length()+A_esp.length()+d_esp.length()+vel.length()+x.getEvolucion().length()+x.getImagen().length();
+                y=y+x.getNombre().length()+x.getApodo()+x.getDescripcion()+altura+x.getCategoria()+peso+x.getGenero()+vida+ataque+Defensa+A_esp+d_esp+vel+x.getEvolucion()+x.getImagen()+x.getTipo()[0]+x.getTipo()[1];
+                for (int i = 0; i < x.getDebilidades().size(); i++) {
+                    y=y+x.getDebilidades().get(i);
+                }
+                for (int i = 0; i < x.getHabilidades().size(); i++) {
+                    y=y+x.getHabilidades().get(i);
+                }
+                FileWriter filewriter = null;
+                BufferedWriter bufferedwriter = null;
+                String res=""+posicion+","+y.length();
+                nodos.add(res);
+                String fin="";
+                for (int i = 0; i < nodos.size(); i++) {
+                    fin=fin+"☼"+nodos.get(i);
+                }
+        try {
+            filewriter = new FileWriter(brr, false);
+            bufferedwriter = new BufferedWriter(filewriter);
+            bufferedwriter.write(fin);
+            bufferedwriter.flush();
+        } catch (Exception e) {
+
+        }
             }else{
                 
             }
